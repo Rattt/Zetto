@@ -7,14 +7,12 @@ require "zetto/version"
 Gem::Specification.new do |s|
   s.name        = "zetto"
   s.version     = Zetto::VERSION
-  s.authors     = ["Ivan"]
+  s.authors     = ["Ivan Moroz", "Denis Shumkov", "Maksim Pestov", "Tatiana Podymova", "Vitaliy S"]
   s.email       = ["Genom-1990@yandex.ru"]
   s.homepage    = ""
-  s.summary     = ""
-  s.description = ""
+  s.summary     = "Rails authentication applications."
+  s.description = "Rails authentication applications."
   s.license     = "MIT"
-
-  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
 
   s.add_dependency "rails", "~> 4.2.6"
 
@@ -22,6 +20,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'factory_girl_rails'
 
+  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["spec/**/*"]
 
   s.add_development_dependency "sqlite3"
