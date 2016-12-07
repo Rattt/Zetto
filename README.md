@@ -1,6 +1,6 @@
 # Zetto
 [![Build Status](https://travis-ci.org/Rattt/zetto.svg?branch=develop)](https://travis-ci.org/Rattt/zetto) 
-**Zetto** Gems for authentication and authorization  `travis-ci`
+**Zetto** Gems for authentication and authorization
 
 ## Information on release
 
