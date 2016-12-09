@@ -22,6 +22,7 @@ module Zetto
 
     ActionController::Base.class_eval do
       require "zetto/config/params"
+      require "zetto/session/create_cookie"
       require "zetto/models/session"
       require "zetto/session/session_registration"
       include Zetto::ControllerMethods

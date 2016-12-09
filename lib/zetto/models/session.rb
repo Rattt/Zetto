@@ -10,6 +10,4 @@ module Zetto
 
     end
   end
-
-
 end
