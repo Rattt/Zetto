@@ -1,3 +1,5 @@
+require "zetto/session/create_cookie"
+
 module Zetto
   module Session
 
@@ -6,11 +8,16 @@ module Zetto
       ALGORITHMS = ['sha1', 'md5']
 
       def initialize(user)
+        unless user.class == Zetto::Config::Params.user_class
+          raise ArgumentError.new('Isn\'t an object of Zetto::Config::Params.user_class')
+        end
         @user = user
       end
 
       def execute
-        save_session_db
+        if session = save_session_db
+          create_cookie?(session)
+        end
       end
 
       private
@@ -29,12 +36,26 @@ module Zetto
           new_session_data[:user_id] = @user.id
           new_session_data[:session_id] = genrate_session_id
           new_session_data[:algorithm] = get_random_algorithm
-          sessionObj = Zetto::Models::Session.new(new_session_data)
-          if (sessionObj.valid?)
-            Zetto::Models::Session.create(new_session_data)
-            break
+          session = Zetto::Models::Session.new(new_session_data)
+
+          if (session.valid? ||
+              {:user_id=>["has already been taken"]} == session.errors.messages)
+            remove_exist_record_if_exist(@user.id)
+            return Zetto::Models::Session.create(new_session_data)
           end
+
         end
+        nil
+      end
+
+      def remove_exist_record_if_exist(id)
+        if session = Zetto::Models::Session.find_by(user_id: id)
+          session.destroy
+        end
+      end
+
+      def create_cookie?(session)
+        !(Zetto::Session::CreateCookie.new(session).create.nil?)
       end
 
     end
