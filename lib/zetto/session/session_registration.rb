@@ -1,5 +1,3 @@
-require "zetto/session/create_cookie"
-
 module Zetto
   module Session
 

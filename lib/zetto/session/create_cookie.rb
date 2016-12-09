@@ -18,7 +18,9 @@ module Zetto
         hash_step = data[0].to_i
         common_hash = data[1]
         ciphered_common_hash = get_ciphered_common_hash(common_hash)
-        get_mix_hashes(@session.session_id, ciphered_common_hash, hash_step)
+        value_of_cookie = get_mix_hashes(@session.session_id, ciphered_common_hash, hash_step)
+        #TODO Здесь добавлю метод, который сохраняет значение в кукис
+        value_of_cookie
       end
 
       private
