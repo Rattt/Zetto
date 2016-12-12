@@ -1,9 +1,11 @@
+require "zetto/config/params"
+
 module Zetto
   module Models
 
     class Session < ActiveRecord::Base
-      belongs_to :user, class_name: 'User', :foreign_key => 'user_id'
-      # TODO User поменять на Zetto::Config::Params.user_class.to_s
+
+      belongs_to :user, class_name: Zetto::Config::Params.user_class, :foreign_key => 'user_id'
 
       # Только алгоритмы из Digest
       enum algorithm: [ 'MD5', 'SHA1', 'RMD160', 'SHA256', 'SHA384', 'SHA512']
