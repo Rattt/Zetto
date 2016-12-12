@@ -19,6 +19,10 @@ module Zetto
         common_hash = data[1]
         ciphered_common_hash = get_ciphered_common_hash(common_hash)
         value_of_cookie = get_mix_hashes(@session.session_id, ciphered_common_hash, hash_step)
+
+        if defined? cookies
+          cookies[:rembo] = value_of_cookie
+        end
         #TODO Здесь добавлю метод, который сохраняет значение в кукис
         value_of_cookie
       end
@@ -26,7 +30,8 @@ module Zetto
       private
 
       def get_common_hash
-        File.read((Dir.pwd).to_s+'/ssessions_common_hash')
+        path_to_common_hash = File.expand_path(File.dirname(__FILE__))
+        File.read(path_to_common_hash.to_s+'/ssessions_common_hash')
       end
 
       def get_ciphered_common_hash(common_hash)
