@@ -4,8 +4,6 @@ module Zetto
 
       class Registration
 
-        ALGORITHMS = ['sha1', 'md5']
-
         def initialize(user, cookies)
           unless user.class == Zetto::Config::Params.user_class
             raise ArgumentError.new('Isn\'t an object of Zetto::Config::Params.user_class')
@@ -31,7 +29,7 @@ module Zetto
         end
 
         def get_random_algorithm
-          ALGORITHMS.sample
+          Zetto::Models::Session.algorithms.keys.sample
         end
 
         def save_session_db

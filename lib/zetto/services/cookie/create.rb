@@ -36,11 +36,8 @@ module Zetto
         end
 
         def get_ciphered_common_hash(common_hash)
-          case @session.algorithm
-            when 'md5'
-              Digest::MD5.hexdigest common_hash
-            when 'sha1'
-              Digest::SHA1.hexdigest common_hash
+          if Zetto::Models::Session.algorithms.keys.include?(@session.algorithm)
+              "Digest::#{@session.algorithm}".constantize.hexdigest common_hash
             else
               Digest::SHA1.hexdigest common_hash
           end
