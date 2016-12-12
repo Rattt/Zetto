@@ -10,7 +10,7 @@ module Zetto
       return false if user.new_record?
       return false unless cookies.class.to_s == "ActionDispatch::Cookies::CookieJar"
       begin
-        Zetto::Session::SessionRegistration.new(user, cookies).execute
+        Zetto::Services::Session::Registration.new(user, cookies).execute
       rescue ArgumentError
         false
       end
