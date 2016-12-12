@@ -3,6 +3,7 @@ module Zetto
     module Cookie
 
       class Create
+        include Zetto::Services::Cookie::Modules::Common
 
         def initialize(session, cookies)
           unless session.class == Zetto::Models::Session
@@ -19,7 +20,7 @@ module Zetto
           data = get_common_data_for_session
           hash_step = data[:hash_step]
           common_hash = data[:common_hash]
-          ciphered_common_hash = get_ciphered_common_hash(common_hash)
+          ciphered_common_hash = get_ciphered_common_hash(@session, common_hash)
           value_of_cookie = get_mix_hashes(@session.session_id, ciphered_common_hash, hash_step)
           @cookies[:rembo] = value_of_cookie
           value_of_cookie
@@ -27,24 +28,8 @@ module Zetto
 
         private
 
-        def get_common_data_for_session
-          path_to_common_hash = File.expand_path(File.dirname(__FILE__))
-          arr = File.read(path_to_common_hash.to_s+'/common_hash').split('.')
-          unless arr.length != 2 || (arr[0].to_i.instance_of? Fixnum)
-            raise ArgumentError.new('Incorrect common hash data')
-          end
-          {hash_step: arr[0].to_i, common_hash: arr[1]}
-        end
-
-        def get_ciphered_common_hash(common_hash)
-          if Zetto::Models::Session.algorithms.keys.include?(@session.algorithm)
-              "Digest::#{@session.algorithm}".constantize.hexdigest common_hash
-            else
-              Digest::SHA1.hexdigest common_hash
-          end
-        end
-
         def get_mix_hashes(my_hash, ciphered_common_hash, step)
+          step += 1
           my_hash_length = my_hash.length
           ciphered_common_hash_length = ciphered_common_hash.length
           str_length = my_hash_length + ciphered_common_hash_length

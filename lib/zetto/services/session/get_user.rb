@@ -19,11 +19,12 @@ module Zetto
         private
 
         def find_user_id_by_cookie
-          Zetto::Services::Cookie::FindUserId.new(@cookies).execute
+          session = Zetto::Services::Cookie::FindSession.new(@cookies).execute
+          session.user
         end
 
-
       end
+
     end
   end
 end
