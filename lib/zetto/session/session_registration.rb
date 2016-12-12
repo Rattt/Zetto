@@ -5,11 +5,16 @@ module Zetto
 
       ALGORITHMS = ['sha1', 'md5']
 
-      def initialize(user)
+      def initialize(user, cookies)
         unless user.class == Zetto::Config::Params.user_class
           raise ArgumentError.new('Isn\'t an object of Zetto::Config::Params.user_class')
         end
+        unless cookies.class.to_s == "ActionDispatch::Cookies::CookieJar"
+          raise ArgumentError.new('To save session cookies needed, object of ActionDispatch::Cookies::CookieJar')
+        end
+
         @user = user
+        @cookies = cookies
       end
 
       def execute
@@ -53,7 +58,7 @@ module Zetto
       end
 
       def create_cookie?(session)
-        !(Zetto::Session::CreateCookie.new(session).create.nil?)
+        !(Zetto::Session::CreateCookie.new(session, @cookies).create.nil?)
       end
 
     end

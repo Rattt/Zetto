@@ -3,11 +3,15 @@ module Zetto
 
     class CreateCookie
 
-      def initialize(session)
+      def initialize(session, cookies)
         unless session.class == Zetto::Models::Session
           raise ArgumentError.new('Isn\'t an object of Zetto::Models::Session')
         end
+        unless cookies.class.to_s == "ActionDispatch::Cookies::CookieJar"
+          raise ArgumentError.new('To save session cookies needed, object of ActionDispatch::Cookies::CookieJar')
+        end
         @session = session
+        @cookies = cookies
       end
 
       def create
@@ -19,14 +23,15 @@ module Zetto
         common_hash = data[1]
         ciphered_common_hash = get_ciphered_common_hash(common_hash)
         value_of_cookie = get_mix_hashes(@session.session_id, ciphered_common_hash, hash_step)
-        #TODO Здесь добавлю метод, который сохраняет значение в кукис
+        @cookies[:rembo] = value_of_cookie
         value_of_cookie
       end
 
       private
 
       def get_common_hash
-        File.read((Dir.pwd).to_s+'/ssessions_common_hash')
+        path_to_common_hash = File.expand_path(File.dirname(__FILE__))
+        File.read(path_to_common_hash.to_s+'/ssessions_common_hash')
       end
 
       def get_ciphered_common_hash(common_hash)
