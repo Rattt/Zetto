@@ -25,6 +25,8 @@ module Zetto
       require "zetto/models/session"
       require "zetto/services/cookie/create"
       require "zetto/services/session/registration"
+      require "zetto/services/cookie/find_user_id"
+      require "zetto/services/session/get_user"
       include Zetto::ControllerMethods
     end
   end

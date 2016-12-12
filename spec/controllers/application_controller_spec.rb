@@ -5,16 +5,16 @@ describe ApplicationController do
   describe "Check of inclusion of methods" do
 
     it "#create_session_for_user?  has to be included" do
-      expect(subject).to respond_to(:check_session?)
+      expect(subject).to respond_to(:create_session_for_user?)
     end
 
-    it "#check_session?  has to be included" do
-      expect(subject).to respond_to(:check_session?)
+    it "#current_user  has to be included" do
+      expect(subject).to respond_to(:current_user)
     end
 
   end
 
-  describe "check create new session" do
+  describe "create new session" do
 
     before(:all) do
       class User
