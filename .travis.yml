@@ -1,8 +1,0 @@
-sudo: false
-language: ruby
-rvm:
-  - 2.2.4
-bundler_args: --jobs=2
-script:
-  - bundle exec rake spec
-before_install: gem install bundler -v 1.13.6

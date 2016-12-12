@@ -46,7 +46,6 @@ GEM
       public_suffix (~> 2.0, >= 2.0.2)
     arel (6.0.3)
     builder (3.2.2)
-    byebug (9.0.6)
     capybara (2.11.0)
       addressable
       mime-types (>= 1.16)
@@ -142,10 +141,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  byebug
-  capybara (~> 2.11.0)
-  factory_girl_rails (~> 4.7.0)
-  rspec-rails (~> 3.5.2)
+  capybara
+  factory_girl_rails
+  rspec-rails
   sqlite3
   zetto!
 
