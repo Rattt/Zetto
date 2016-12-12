@@ -17,10 +17,8 @@ describe ApplicationController do
   describe "check create new session" do
 
     before(:all) do
-
       class User
         attr_accessor :id
-
         def new_record?;
           false;
         end
@@ -58,6 +56,12 @@ describe ApplicationController do
       noTargetObj = NoTarget.new
       noTargetObj.id = 1
       expect(subject.create_session_for_user?(noTargetObj, @cookies)).to be false
+    end
+
+    it "#create_session_for_user? bad cookies object be false" do
+      class CookieEmulatorBad < Hash ; end
+      cookies = CookieEmulatorBad.new
+      expect(subject.create_session_for_user?(@user, cookies)).to be false
     end
 
   end
