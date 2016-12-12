@@ -67,7 +67,7 @@ module Zetto
 
       describe 'object must include' do
         it 'contains an admissible set of enciphering' do
-          expect(['sha1', 'md5']).to include(subject.algorithm)
+          expect(Zetto::Models::Session.algorithms.keys).to include(subject.algorithm)
         end
       end
 

@@ -13,7 +13,7 @@ describe ApplicationController do
     end
 
   end
-
+=begin
   describe "create new session" do
 
     before(:all) do
@@ -37,12 +37,12 @@ describe ApplicationController do
     end
 
     it "#create_session_for_user? for which user has no session be true" do
-      expect(subject.create_session_for_user?(@user, @cookies)).to be true
+      expect(subject.create_session_for_user?(@user)).to be true
     end
 
     it "#create_session_for_user? for which user has session be true" do
-      subject.create_session_for_user?(@user, @cookies)
-      expect(subject.create_session_for_user?(@user, @cookies)).to be true
+      subject.create_session_for_user?(@user)
+      expect(subject.create_session_for_user?(@user)).to be true
     end
 
     it "#create_session_for_user? for for object no target class be false" do
@@ -61,11 +61,11 @@ describe ApplicationController do
     it "#create_session_for_user? bad cookies object be false" do
       class CookieEmulatorBad < Hash ; end
       cookies = CookieEmulatorBad.new
-      expect(subject.create_session_for_user?(@user, cookies)).to be false
+      expect(subject.create_session_for_user?(@user)).to be false
     end
 
   end
-
+=end
 end
 
 
