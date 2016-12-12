@@ -34,33 +34,42 @@ module Zetto
           session = Zetto::Models::Session.find_by(session_id: data[:session_id])
           if secret_hash_correct?(session, common_hash, data[:ciphered_common_hash])
             session
-          else
-            nil
           end
         end
 
         def get_data_of_token(token, step)
-          # TODO Будут сбои при большом шаге, поправить
-          count_of_session = 9
+          token_length      = token.length
+          count_of_session  = Zetto::Models::Session::SESSION_LENGTH
+          not_crowded_steps = (token_length - count_of_session) / step
+
+          ciphered_common_hash_arr = Array.new
+          session_id_arr           = Array.new
+
+          frequency = 0
           arr = token.chars
-          ciphered_common_hash = Array.new
-          session_id = Array.new
-          j = 0
           arr.length.times do |i|
-            if step == j
-              if count_of_session > 0
-                session_id << arr[i]
-                j = 0
-              else
-                ciphered_common_hash << arr[i]
-              end
+            if step == frequency &&
+               not_crowded_steps > 0 &&
+               count_of_session > 0
+              session_id_arr << arr[i]
+              not_crowded_steps -= 1
               count_of_session -= 1
+              frequency = 0
             else
-              ciphered_common_hash << arr[i]
-              j += 1
+              ciphered_common_hash_arr << arr[i]
+              frequency += 1
             end
           end
-          {session_id: session_id.join(""), ciphered_common_hash: ciphered_common_hash.join("")}
+
+          if count_of_session > 0
+            session_id_arr += ciphered_common_hash_arr.last(count_of_session)
+            ciphered_common_hash_arr = ciphered_common_hash_arr[0..ciphered_common_hash_arr.length - 1 - count_of_session]
+          end
+
+          ciphered_common_hash = ciphered_common_hash_arr.join("")
+          session_id = session_id_arr.join("")
+
+          {session_id: session_id, ciphered_common_hash: ciphered_common_hash}
         end
 
         def secret_hash_correct?(sessionObj, common_hash, ciphered_common_hash)

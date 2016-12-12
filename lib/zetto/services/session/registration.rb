@@ -45,7 +45,6 @@ module Zetto
               remove_exist_record_if_exist(@user.id)
               return Zetto::Models::Session.create(new_session_data)
             end
-
           end
           nil
         end
@@ -61,6 +60,7 @@ module Zetto
         end
 
       end
+
     end
   end
 end

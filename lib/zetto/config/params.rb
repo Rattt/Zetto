@@ -1,5 +1,6 @@
 module Zetto
   module Config
+
     class Params
       @@user_class = ''
 
@@ -16,5 +17,6 @@ module Zetto
       end
 
     end
+
   end
 end

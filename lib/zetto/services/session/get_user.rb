@@ -13,14 +13,14 @@ module Zetto
         end
 
         def execute
-          find_user_id_by_cookie
+          find_user_by_cookie
         end
 
         private
 
-        def find_user_id_by_cookie
+        def find_user_by_cookie
           session = Zetto::Services::Cookie::FindSession.new(@cookies).execute
-          session.user
+          session.user rescue nil
         end
 
       end
