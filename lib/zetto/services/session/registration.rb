@@ -25,7 +25,7 @@ module Zetto
         private
 
         def genrate_session_id
-          (0...9).map { (65 + rand(26)).chr }.join
+          SecureRandom.hex(9)[0..9]
         end
 
         def get_random_algorithm
@@ -39,6 +39,7 @@ module Zetto
             new_session_data[:session_id] = genrate_session_id
             new_session_data[:algorithm] = get_random_algorithm
             session = Zetto::Models::Session.new(new_session_data)
+            byebug
 
             if (session.valid? ||
                 {:user_id=>["has already been taken"]} == session.errors.messages)
