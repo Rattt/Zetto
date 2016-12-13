@@ -25,7 +25,7 @@ module Zetto
         private
 
         def genrate_session_id
-          (0...9).map { (65 + rand(26)).chr }.join
+          SecureRandom.hex(9)[0..8]
         end
 
         def get_random_algorithm
@@ -45,7 +45,6 @@ module Zetto
               remove_exist_record_if_exist(@user.id)
               return Zetto::Models::Session.create(new_session_data)
             end
-
           end
           nil
         end
@@ -57,10 +56,11 @@ module Zetto
         end
 
         def create_cookie?(session)
-          !(Zetto::Services::Cookie::Create.new(session, @cookies).execute.nil?)
+          !(Zetto::Services::Cookie::SaveSession.new(session, @cookies).execute.nil?)
         end
 
       end
+
     end
   end
 end
