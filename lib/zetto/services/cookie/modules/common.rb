@@ -14,11 +14,7 @@ module Zetto
           end
 
           def get_ciphered_common_hash(sessionObj, common_hash)
-            if Zetto::Models::Session.algorithms.keys.include?(sessionObj.algorithm)
-              "Digest::#{sessionObj.algorithm}".constantize.hexdigest common_hash
-            else
-              Digest::SHA1.hexdigest common_hash
-            end
+            Zetto::Models::Session.algorithms.keys.include?(sessionObj.algorithm) ? "Digest::#{sessionObj.algorithm}".constantize.hexdigest common_hash :  Digest::SHA1.hexdigest common_hash
           end
 
         end
