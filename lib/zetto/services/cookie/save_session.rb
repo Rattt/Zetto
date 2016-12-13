@@ -2,7 +2,7 @@ module Zetto
   module Services
     module Cookie
 
-      class Create
+      class SaveSession
         include Zetto::Services::Cookie::Modules::Common
 
         def initialize(session, cookies)

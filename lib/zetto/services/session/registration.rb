@@ -25,7 +25,7 @@ module Zetto
         private
 
         def genrate_session_id
-          SecureRandom.hex(9)[0..9]
+          SecureRandom.hex(9)[0..8]
         end
 
         def get_random_algorithm
@@ -39,7 +39,6 @@ module Zetto
             new_session_data[:session_id] = genrate_session_id
             new_session_data[:algorithm] = get_random_algorithm
             session = Zetto::Models::Session.new(new_session_data)
-            byebug
 
             if (session.valid? ||
                 {:user_id=>["has already been taken"]} == session.errors.messages)
@@ -57,7 +56,7 @@ module Zetto
         end
 
         def create_cookie?(session)
-          !(Zetto::Services::Cookie::Create.new(session, @cookies).execute.nil?)
+          !(Zetto::Services::Cookie::SaveSession.new(session, @cookies).execute.nil?)
         end
 
       end

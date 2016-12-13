@@ -6,7 +6,7 @@ module Zetto
 
           def get_common_data_for_session
             path_to_common_hash = File.expand_path(File.dirname(__FILE__))
-            arr = File.read(path_to_common_hash.to_s+'/common_hash').split('.')
+            arr = File.read(path_to_common_hash.to_s+'/../common_hash').split('.')
             unless arr.length != 2 || (arr[0].to_i.instance_of? Fixnum)
               raise ArgumentError.new('Incorrect common hash data')
             end
@@ -14,7 +14,7 @@ module Zetto
           end
 
           def get_ciphered_common_hash(sessionObj, common_hash)
-            Zetto::Models::Session.algorithms.keys.include?(sessionObj.algorithm) ? "Digest::#{sessionObj.algorithm}".constantize.hexdigest common_hash :  Digest::SHA1.hexdigest common_hash
+            Zetto::Models::Session.algorithms.keys.include?(sessionObj.algorithm) ? "Digest::#{sessionObj.algorithm}".constantize.hexdigest(common_hash) :  Digest::SHA1.hexdigest(common_hash)
           end
 
         end
