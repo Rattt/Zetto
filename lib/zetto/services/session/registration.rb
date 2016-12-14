@@ -12,7 +12,7 @@ module Zetto
             raise ArgumentError.new('To save session cookies needed, object of ActionDispatch::Cookies::CookieJar')
           end
 
-          @user = user
+          @user    = user
           @cookies = cookies
         end
 
