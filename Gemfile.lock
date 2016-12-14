@@ -3,6 +3,7 @@ PATH
   specs:
     zetto (0.0.1)
       rails (~> 4.2.6)
+      redis (~> 3.2)
 
 GEM
   remote: https://rubygems.org/
@@ -106,6 +107,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (12.0.0)
+    redis (3.3.2)
     rspec-core (3.5.4)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)

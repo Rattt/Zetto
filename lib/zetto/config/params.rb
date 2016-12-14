@@ -15,7 +15,6 @@ module Zetto
       def self.user_class=(user)
         @@user_class = user
       end
-
     end
 
   end
