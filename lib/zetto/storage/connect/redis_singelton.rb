@@ -2,12 +2,12 @@ module Zetto
   module Storage
     module Connect
 
-    require "redis_singelton"
+    require "redis"
 
       module RedisSingelton
         @redis = Redis.new(:password => "3443555")
         class << self
-          def self.get
+          def get
             @redis
           end
         end

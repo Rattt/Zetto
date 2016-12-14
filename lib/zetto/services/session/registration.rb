@@ -17,8 +17,13 @@ module Zetto
         end
 
         def execute
-          if session = save_session_db
-            create_cookie?(session)
+          begin
+            if session = save_session_db
+              create_cookie?(session)
+            end
+          rescue
+            puts 'An error occurred Zetto::Services::Session::Registration'
+            nil
           end
         end
 
