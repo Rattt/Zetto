@@ -21,4 +21,8 @@ module Zetto
     @user_class = user
   end
 
+  def self.setup
+    yield self
+  end
+
 end
