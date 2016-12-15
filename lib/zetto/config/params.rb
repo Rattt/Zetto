@@ -22,6 +22,7 @@ module Zetto
         def user_class=(user)
           @user_class = user
         end
+
       end
     end
 

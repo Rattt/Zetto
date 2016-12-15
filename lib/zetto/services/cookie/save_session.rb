@@ -16,11 +16,11 @@ module Zetto::Services::Cookie
 
     def execute
       begin
-        data = Zetto::Storage::Keep::Operational::ImpuretyData::Generate.new.execute
+        data = Zetto::Storage::Tasks::ImpuretyData::Generate.new.execute
         data[:ciphered_impurity_hash] = get_ciphered_impurity_hash(@session, data['impurity_hash'])
         mixed_hash = get_mix_hashes(@session.session_id, data[:ciphered_impurity_hash], data['hash_step'])
         @cookies[:rembo] = {data['key'] => mixed_hash}.to_json
-        Zetto::Storage::Keep::Operational::ImpuretyData::Save.new.execute(data)
+        Zetto::Storage::Tasks::ImpuretyData::Save.new.execute(data)
         mixed_hash
       rescue
         puts 'An error occurred Zetto::Services::Cookie::SaveSession'
@@ -29,5 +29,5 @@ module Zetto::Services::Cookie
     end
 
   end
-  
+
 end
