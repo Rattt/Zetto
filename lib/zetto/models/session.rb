@@ -5,7 +5,6 @@ module Zetto
 
     class Session < ActiveRecord::Base
 
-      SESSION_LENGTH = 9
       SESSION_TIME_MIN = 30
 
       belongs_to :user, class_name: Zetto::Config::Params.user_class, :foreign_key => 'user_id'

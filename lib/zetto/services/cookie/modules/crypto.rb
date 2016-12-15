@@ -13,7 +13,7 @@ module Zetto
 
           def get_data_of_token(token, step)
             token_length      = token.length
-            count_of_session  = Zetto::Models::Session::SESSION_LENGTH
+            count_of_session  = Zetto::Config::Params.session_length
             not_crowded_steps = (token_length - count_of_session) / step
 
             ciphered_impurity_hash_arr = Array.new

@@ -39,7 +39,7 @@ module Zetto
             5.times do
               key = rand(36**12).to_s(36)
 
-              time_end = Time.now.to_i + Zetto::Models::Session::SESSION_TIME_MIN * 60
+              time_end = Time.now.to_i + Zetto::Config::Params.session_time_min * 60
 
               if(@redis.zadd('impurity_hash_keys_sort_by_date', time_end,  key))
                 result = key
