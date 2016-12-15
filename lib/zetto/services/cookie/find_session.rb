@@ -40,6 +40,8 @@ module Zetto
           if secret_hash_correct?(session, data_session['impurity_hash'], data_token[:ciphered_impurity_hash])
             session
           end
+
+
         end
 
         def secret_hash_correct?(sessionObj, impurity_hash, ciphered_impurity_hash)

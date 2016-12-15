@@ -5,7 +5,8 @@ module Zetto
     require "redis"
 
       module RedisSingelton
-        @redis = Redis.new(:password => "3443555")
+
+        @redis = Redis.new (Zetto::Config::Params.redis_connect || {}).merge({:driver => :hiredis})
         class << self
           def get
             @redis
@@ -16,3 +17,5 @@ module Zetto
     end
   end
 end
+
+
