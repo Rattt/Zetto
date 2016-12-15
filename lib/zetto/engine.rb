@@ -26,29 +26,11 @@ module Zetto
       require "zetto/models/session"
 
       require "zetto/storage/connect/load"
-      require "zetto/storage/keep/impurety_data/load"
-      #require "zetto/storage/keep/session/load"
+      require "zetto/storage/tasks/impurety_data/load"
+      require "zetto/storage/orm/load"
 
       require "zetto/services/cookie/load"
       require "zetto/services/session/load"
-
-=begin
-      require "zetto/config/params"
-      require "zetto/storage/connect/redis_singelton"
-      require "zetto/storage/keep/impurety_data/generate"
-      require "zetto/storage/keep/impurety_data/save"
-      require "zetto/storage/keep/impurety_data/restore"
-
-      require "zetto/models/session"
-
-      require "zetto/services/cookie/modules/crypto"
-      require "zetto/services/cookie/save_session"
-      require "zetto/services/session/registration"
-      require "zetto/services/cookie/find_session"
-      require "zetto/services/session/get_user"
-=end
-
-
 
       include Zetto::ControllerMethods
 
