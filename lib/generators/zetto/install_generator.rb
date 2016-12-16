@@ -10,10 +10,6 @@ module Zetto
     def copy_initializer
       template "zetto.rb", "config/initializers/zetto.rb"
     end
-
-    def rails_4?
-      Rails::VERSION::MAJOR == 4
-    end
-
+    
   end
 end
