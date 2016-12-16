@@ -19,6 +19,7 @@ module Zetto::Storage::Session
           new_session_data["algorithm"]  = generate_random_algorithm
 
           if validate_session_id_uniq?(new_session_data["session_id"])
+            remove_old_hash!
             save(new_session_data)
             return Zetto::Storage::Session::Data::Response.new(new_session_data)
           end
@@ -58,6 +59,10 @@ module Zetto::Storage::Session
 
     def generate_random_algorithm
       ALGORITHMS.sample
+    end
+
+    def remove_old_hash!
+      @redis.zremrangebyscore('sessions', 0, Time.now.to_i)
     end
 
   end
