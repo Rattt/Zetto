@@ -20,8 +20,7 @@ module Zetto::Storage::Session
 
           if validate_session_id_uniq?(new_session_data["session_id"])
             remove_old_hash!
-            save(new_session_data)
-            return Zetto::Storage::Session::Data::Response.new(new_session_data)
+            return save(new_session_data)
           end
         end
         nil
@@ -38,19 +37,21 @@ module Zetto::Storage::Session
     end
 
     def save(new_session_data)
-      time_life = Zetto::Config::Params.session_time_min * 60
-      time_end = Time.now.to_i + time_life
+      time_death = Zetto::Config::Params.session_time_min * 60
+      time_end = Time.now.to_i + time_death
 
       @redis.zadd("sessions", time_end, new_session_data["session_id"])
       key = "sessions_user:" + new_session_data["user_id"].to_s
 
       @redis.set(key, new_session_data["session_id"])
-      @redis.expire(key, time_life)
+      @redis.expire(key, time_death)
 
       key = "session:" + new_session_data["session_id"].to_s
       @redis.hset(key, 'user_id', new_session_data["user_id"])
       @redis.hset(key, 'algorithm', new_session_data["algorithm"])
-      @redis.expire(key, time_life)
+      @redis.expire(key, time_death)
+      new_session_data["time_live_s"] = time_death
+      Zetto::Storage::Session::Data::Response.new(new_session_data)
     end
 
     def genrate_session_id
