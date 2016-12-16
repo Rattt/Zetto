@@ -4,7 +4,12 @@
 
 ## Information on release
 
-The version isn't stable yet, to use doesn't sitoit while is in the status of development
+It can be used as storages of sessions in your project, during creation writing of authorization or authentication.
+Will keep the object belonging to the specified class.
+If he belongs to the specified class, then we store an object.
+Add to your controller
+```ruby create_session_for_user(user)```
+```ruby current_user```
 
 ## Ruby version tested
 
@@ -17,16 +22,22 @@ Add this line to your application's Gemfile:
 ```ruby
 gem 'zetto'
 ```
-
 And then execute:
 
-    $ bundle
+```ruby
+bundle
+```
 
-Or install it yourself as:
+Run installation:
 
-    $ gem install zetto
+```ruby
+rails g zetto:install
+```
+you can change a config
 
 ## Dependences
+
+Only for `rails` framework. And you need `redis` db in your computer
 
 # Help
 
