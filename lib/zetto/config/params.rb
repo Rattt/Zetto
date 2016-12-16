@@ -5,7 +5,8 @@ module Zetto
 
       @user_class = ''
       class << self
-        attr_accessor :redis_connect, :session_length, :session_time_min, :session_time_restart_min
+        attr_accessor :redis_connect, :session_length, :session_time_min, :session_time_restart_min,
+                      :user_class_name, :user_class_password
 
         def set_params
           yield self
@@ -15,6 +16,7 @@ module Zetto
           begin
             @user_class.constantize
           rescue Exception => e
+            puts 'Invalid input arguments, unknown target class'
             nil
           end
         end

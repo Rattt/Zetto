@@ -4,6 +4,10 @@ Zetto.setup do |config|
   # Класс к который получаем по сессии
   config.user_class = "User"
 
+  # Поиск сесиии по этим полям
+  config.user_class_name     = 'email'
+  config.user_class_password = 'password'
+
   # Настройки для подключения к бд redis, не используем 0 бд, так-как она предназначается для тестовых нужд
   config.redis_connect = {:password => "3443555", "db" => 1}
 
