@@ -16,7 +16,7 @@ module Zetto
 
     def authentication(name, password)
       begin
-        user = Zetto::Services::Authentication::FindUser.new(name, password)
+        user = Zetto::Services::Authentication::FindUser.new(name, password).execute
         return nil if user.nil?
         return nil if user.new_record?
         Zetto::Services::Session::Registration.new(user, cookies).execute
