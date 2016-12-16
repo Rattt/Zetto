@@ -4,8 +4,9 @@ module Zetto::Services::Cookie
     include Zetto::Services::Cookie::Modules::Crypto
 
     def initialize(session, cookies)
-      unless session.class == Zetto::Models::Session
-        raise ArgumentError.new('Isn\'t an object of Zetto::Models::Session')
+
+      unless session.class.to_s == "Zetto::Storage::Tasks::Session::Data::Response"
+        raise ArgumentError.new('Isn\'t an object of Zetto::Storage::Tasks::Session::Data::Response')
       end
       unless cookies.class.to_s == "ActionDispatch::Cookies::CookieJar"
         raise ArgumentError.new('To save session cookies needed, object of ActionDispatch::Cookies::CookieJar')

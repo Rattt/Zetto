@@ -27,7 +27,7 @@ module Zetto
 
       require "zetto/storage/connect/load"
       require "zetto/storage/tasks/impurety_data/load"
-      require "zetto/storage/orm/load"
+      require "zetto/storage/tasks/session/load"
 
       require "zetto/services/cookie/load"
       require "zetto/services/session/load"

@@ -16,7 +16,7 @@ module Zetto::Services::Session
 
     def execute
       begin
-        if session = save_session_db
+        if session = Zetto::Storage::Tasks::Session::Create.new(@user).execute()
           create_cookie?(session)
         end
       rescue
@@ -26,37 +26,6 @@ module Zetto::Services::Session
     end
 
     private
-
-    def genrate_session_id
-      SecureRandom.hex(9)[0..8]
-    end
-
-    def get_random_algorithm
-      Zetto::Models::Session.algorithms.keys.sample
-    end
-
-    def save_session_db
-      5.times do
-        new_session_data = {}
-        new_session_data[:user_id] = @user.id
-        new_session_data[:session_id] = genrate_session_id
-        new_session_data[:algorithm] = get_random_algorithm
-        session = Zetto::Models::Session.new(new_session_data)
-
-        if (session.valid? ||
-            {:user_id => ["has already been taken"]} == session.errors.messages)
-          remove_exist_record_if_exist(@user.id)
-          return Zetto::Models::Session.create(new_session_data)
-        end
-      end
-      nil
-    end
-
-    def remove_exist_record_if_exist(id)
-      if session = Zetto::Models::Session.find_by(user_id: id)
-        session.destroy
-      end
-    end
 
     def create_cookie?(session)
       !(Zetto::Services::Cookie::SaveSession.new(session, @cookies).execute.nil?)
