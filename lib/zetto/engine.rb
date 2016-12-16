@@ -24,6 +24,7 @@ module Zetto
 
       require "zetto/config/params"
 
+      require "zetto/storage/common/load"
       require "zetto/storage/connect/load"
       require "zetto/storage/impurety_data/load"
       require "zetto/storage/session/load"

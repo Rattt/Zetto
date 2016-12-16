@@ -14,7 +14,8 @@ module Zetto::Storage::ImpuretyData
         data['impurity_hash'] = generate_hash
         data['key'] = generate_key
 
-        data
+        byebug
+        Zetto::Storage::ImpuretyData::Data::Response.new(data)
       rescue
         puts 'An error occurred Zetto::Storage::ImpuretyData::Generate'
         nil

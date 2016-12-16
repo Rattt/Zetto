@@ -4,14 +4,13 @@ module Zetto::Storage::ImpuretyData
 
     def execute(data)
       begin
+        unless data.class.to_s == "Zetto::Storage::ImpuretyData::Data::Response"
+          raise ArgumentError.new('Isn\'t an object of Zetto::Storage::ImpuretyData::Data::Response')
+        end
         save_data = {}
         key = data['key']
         save_data['hash_step'] = data['hash_step']
         save_data['impurity_hash'] = data['impurity_hash']
-
-        if save_data.values.include?(nil) || key == nil
-          raise ArgumentError.new('Incorrect data for storage shunt hash')
-        end
 
         redis = Zetto::Storage::Connect::RedisSingelton.get
         impurity_hash_key = 'impurity_hash_data:' + key.to_s
