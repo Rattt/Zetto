@@ -41,10 +41,6 @@ module Zetto::Storage::Session
       time_end = Time.now.to_i + time_death
 
       @redis.zadd("sessions", time_end, new_session_data["session_id"])
-      key = "sessions_user:" + new_session_data["user_id"].to_s
-
-      @redis.set(key, new_session_data["session_id"])
-      @redis.expire(key, time_death)
 
       key = "session:" + new_session_data["session_id"].to_s
       @redis.hset(key, 'user_id', new_session_data["user_id"])
