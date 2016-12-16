@@ -28,8 +28,7 @@ module Zetto::Storage::Session::Data
       time_restart = time_restart * 60
       self['time_live_s'] <= time_restart
     end
-
-
+    
   end
 
 end
