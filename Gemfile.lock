@@ -3,7 +3,7 @@ PATH
   specs:
     zetto (0.0.1)
       hiredis (~> 0.6.0)
-      rails (~> 4.2.6)
+      rails
       redis (~> 3.2)
 
 GEM
