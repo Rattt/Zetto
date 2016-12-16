@@ -10,15 +10,15 @@ module Zetto::Services::Authentication
         raise ArgumentError.new('Attribute name(user_class_name) or password(user_class_password) is not defined')
       end
 
-      @name     = name
+      @name = name
       @password = password
     end
 
     def execute
       begin
-      name     = Zetto::Config::Params.user_class_name
-      password = Zetto::Config::Params.user_class_password
-      @user_class.where("#{name} = ? AND #{password} = ?", name, password).first
+        name = Zetto::Config::Params.user_class_name
+        password = Zetto::Config::Params.user_class_password
+        @user_class.where("#{name} = ? AND #{password} = ?", @name, @password).first
       rescue
         puts 'An error occurred Zetto::Services::Authentication::FindUser'
         nil
