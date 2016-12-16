@@ -4,7 +4,8 @@ module Zetto
     def current_user
       begin
         Zetto::Services::Session::GetUser.new(cookies).execute
-      rescue ArgumentError
+      rescue ArgumentError => e
+        puts e.message
         puts 'Invalid input arguments Zetto::ControllerMethods #current_user'
         nil
       rescue
@@ -13,18 +14,24 @@ module Zetto
       end
     end
 
-    def create_session_for_user(user)
-      return false unless user.class == Zetto::Config::Params.user_class
-      return false if user.new_record?
+    def authentication(name, password)
       begin
+        user = Zetto::Services::Authentication::FindUser.new(name, password)
+        return nil if user.nil?
+        return nil if user.new_record?
         Zetto::Services::Session::Registration.new(user, cookies).execute
-      rescue ArgumentError
-        puts 'Invalid input arguments Zetto::ControllerMethods #create_session_for_user'
+      rescue ArgumentError => e
+        puts e.message
+        puts 'Invalid input arguments Zetto::ControllerMethods #authentication'
         nil
       rescue
-        puts 'An error occurred Zetto::ControllerMethods #create_session_for_user'
+        puts 'An error occurred Zetto::ControllerMethods #authentication'
         nil
       end
+    end
+
+    def logout
+      @cookies[:rembo] = nil
     end
 
   end

@@ -23,6 +23,7 @@ module Zetto
 
       require "zetto/services/cookie/load"
       require "zetto/services/session/load"
+      require "zetto/services/authentication/load"
 
       include Zetto::ControllerMethods
 
