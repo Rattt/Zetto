@@ -50,6 +50,6 @@ Only for `rails` framework. And you need `redis` db in your computer.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/zetto. This project is intended to be a safe,
+Bug reports and pull requests are welcome on GitHub at https://github.com/Rattt/zetto. This project is intended to be a safe,
 welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
