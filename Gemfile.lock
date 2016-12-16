@@ -2,8 +2,10 @@ PATH
   remote: .
   specs:
     zetto (0.0.1)
+      hiredis (~> 0.6.0)
       rails (~> 4.2.6)
       redis (~> 3.2)
+      virtus
 
 GEM
   remote: https://rubygems.org/
@@ -46,6 +48,10 @@ GEM
     addressable (2.5.0)
       public_suffix (~> 2.0, >= 2.0.2)
     arel (6.0.3)
+    axiom-types (0.1.1)
+      descendants_tracker (~> 0.0.4)
+      ice_nine (~> 0.11.0)
+      thread_safe (~> 0.3, >= 0.3.1)
     builder (3.2.2)
     byebug (9.0.6)
     capybara (2.11.0)
@@ -55,8 +61,13 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    coercible (1.0.0)
+      descendants_tracker (~> 0.0.1)
     concurrent-ruby (1.0.2)
+    descendants_tracker (0.0.4)
+      thread_safe (~> 0.3, >= 0.3.1)
     diff-lcs (1.2.5)
+    equalizer (0.0.11)
     erubis (2.7.0)
     factory_girl (4.7.0)
       activesupport (>= 3.0.0)
@@ -65,7 +76,9 @@ GEM
       railties (>= 3.0.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    hiredis (0.6.1)
     i18n (0.7.0)
+    ice_nine (0.11.2)
     json (1.8.3)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
@@ -137,6 +150,11 @@ GEM
     thread_safe (0.3.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    virtus (1.0.5)
+      axiom-types (~> 0.1)
+      coercible (~> 1.0)
+      descendants_tracker (~> 0.0, >= 0.0.3)
+      equalizer (~> 0.0, >= 0.0.9)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
