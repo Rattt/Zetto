@@ -12,7 +12,6 @@ module Zetto::Services::Cookie
 
     def execute
       begin
-
         token_data = get_token_from_cookies
         if token_data.present?
           get_session_from_db(token_data)

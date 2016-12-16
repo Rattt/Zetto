@@ -2,22 +2,12 @@ module Zetto::Storage::Session::Data
 
   class Response
 
+    attr_reader :session_id, :user_id, :algorithm
+
     def initialize(data)
       @session_id = data["session_id"]
       @user_id    = data["user_id"]
       @algorithm  = data["algorithm"]
-    end
-
-    def session_id
-      return @session_id
-    end
-
-    def user_id
-      return @user_id
-    end
-
-    def algorithm
-      return @algorithm
     end
 
     def user

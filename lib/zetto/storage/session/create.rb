@@ -2,7 +2,7 @@ module Zetto::Storage::Session
 
   class Create
 
-    ALGORITHMS = [ 'MD5', 'SHA1', 'RMD160', 'SHA256', 'SHA384', 'SHA512']
+    ALGORITHMS = ['MD5', 'SHA1', 'RMD160', 'SHA256', 'SHA384', 'SHA512']
 
     def initialize(user)
       @redis = Zetto::Storage::Connect::RedisSingelton.get
@@ -14,13 +14,12 @@ module Zetto::Storage::Session
         new_session_data = nil
         5.times do
           new_session_data = {}
-          new_session_data["session_id"] = genrate_session_id
           new_session_data["user_id"]    = @user.id
-          new_session_data["algorithm"]  = get_random_algorithm
+          new_session_data["session_id"] = genrate_session_id
+          new_session_data["algorithm"]  = generate_random_algorithm
 
           if validate_session_id_uniq?(new_session_data["session_id"])
-            save_session(new_session_data)
-
+            save(new_session_data)
             return Zetto::Storage::Session::Data::Response.new(new_session_data)
           end
         end
@@ -37,7 +36,7 @@ module Zetto::Storage::Session
       @redis.zscore("sessions", session_id) ? false : true
     end
 
-    def save_session(new_session_data)
+    def save(new_session_data)
       time_life = Zetto::Config::Params.session_time_min * 60
       time_end = Time.now.to_i + time_life
 
@@ -57,12 +56,8 @@ module Zetto::Storage::Session
       SecureRandom.hex(9)[0..8]
     end
 
-    def get_random_algorithm
+    def generate_random_algorithm
       ALGORITHMS.sample
-    end
-
-    def remove_old_hash!
-      @redis.zremrangebyscore('sessions', 0, Time.now.to_i)
     end
 
   end
