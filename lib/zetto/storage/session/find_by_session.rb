@@ -13,6 +13,7 @@ module Zetto::Storage::Session
         key = "session:" + @session_id.to_s
         data = {}
         data = @redis.hgetall(key)
+        data['time_live_s'] = @redis.ttl(key)
         data["session_id"] = @session_id.to_s
         return Zetto::Storage::Session::Data::Response.new(data)
       rescue

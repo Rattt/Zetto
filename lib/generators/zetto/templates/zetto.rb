@@ -13,4 +13,7 @@ Zetto.setup do |config|
   # Время жизни сесии
   config.session_time_min = 30
 
+  # За сколько минут перегенирировать
+  config.session_time_restart_min = 5
+
 end

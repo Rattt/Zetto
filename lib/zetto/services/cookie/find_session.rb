@@ -38,12 +38,15 @@ module Zetto::Services::Cookie
         session
       end
 
+      session
     end
 
     def secret_hash_correct?(sessionObj, impurity_hash, ciphered_impurity_hash)
       return false if sessionObj.nil?
       get_ciphered_impurity_hash(sessionObj, impurity_hash) == ciphered_impurity_hash
     end
+
+
 
   end
 

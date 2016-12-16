@@ -23,7 +23,12 @@ module Zetto::Services::Session
 
     def find_user_by_cookie
       session = Zetto::Services::Cookie::FindSession.new(@cookies).execute
-      session.user rescue nil
+      user = session.user rescue nil
+      if session.soon_rotten?
+        session = Zetto::Storage::Session::Create.new(user).execute
+        Zetto::Services::Cookie::SaveSession.new(session, @cookies).execute
+      end
+      user
     end
 
   end

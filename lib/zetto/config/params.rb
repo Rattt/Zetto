@@ -5,7 +5,7 @@ module Zetto
 
       @user_class = ''
       class << self
-        attr_accessor :redis_connect, :session_length, :session_time_min
+        attr_accessor :redis_connect, :session_length, :session_time_min, :session_time_restart_min
 
         def set_params
           yield self
