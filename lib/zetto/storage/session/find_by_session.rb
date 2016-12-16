@@ -1,4 +1,4 @@
-module Zetto::Storage::Tasks::Session
+module Zetto::Storage::Session
 
   class FindBySession
 
@@ -14,9 +14,9 @@ module Zetto::Storage::Tasks::Session
         data = {}
         data = @redis.hgetall(key)
         data["session_id"] = @session_id.to_s
-        return Zetto::Storage::Tasks::Session::Data::Response.new(data)
+        return Zetto::Storage::Session::Data::Response.new(data)
       rescue
-        puts 'An error occurred Zetto::Storage::Tasks::Session::FindBySession'
+        puts 'An error occurred Zetto::Storage::Session::FindBySession'
         nil
       end
     end

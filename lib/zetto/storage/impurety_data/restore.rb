@@ -1,4 +1,4 @@
-module Zetto::Storage::Tasks::ImpuretyData
+module Zetto::Storage::ImpuretyData
 
   class Restore
 
@@ -11,7 +11,7 @@ module Zetto::Storage::Tasks::ImpuretyData
         data['token'] = token_data_hash[key_of_impurity_hash]
         data
       rescue
-        puts 'An error occurred Zetto::Storage::Tasks::ImpuretyData::Restore'
+        puts 'An error occurred Zetto::Storage::ImpuretyData::Restore'
         nil
       end
     end

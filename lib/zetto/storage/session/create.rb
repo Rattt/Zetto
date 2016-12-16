@@ -1,4 +1,4 @@
-module Zetto::Storage::Tasks::Session
+module Zetto::Storage::Session
 
   class Create
 
@@ -21,12 +21,12 @@ module Zetto::Storage::Tasks::Session
           if validate_session_id_uniq?(new_session_data["session_id"])
             save_session(new_session_data)
 
-            return Zetto::Storage::Tasks::Session::Data::Response.new(new_session_data)
+            return Zetto::Storage::Session::Data::Response.new(new_session_data)
           end
         end
         nil
       rescue
-        puts 'An error occurred Zetto::Storage::Tasks::Session::Create'
+        puts 'An error occurred Zetto::Storage::Session::Create'
         nil
       end
     end
@@ -58,7 +58,7 @@ module Zetto::Storage::Tasks::Session
     end
 
     def get_random_algorithm
-      Zetto::Models::Session.algorithms.keys.sample
+      ALGORITHMS.sample
     end
 
     def remove_old_hash!

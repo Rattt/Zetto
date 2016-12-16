@@ -1,4 +1,4 @@
-module Zetto::Storage::Tasks::ImpuretyData
+module Zetto::Storage::ImpuretyData
 
   class Save
 
@@ -18,7 +18,7 @@ module Zetto::Storage::Tasks::ImpuretyData
         redis.set(impurity_hash_key, save_data.to_json)
         redis.expire(impurity_hash_key, Zetto::Config::Params.session_time_min * 60)
       rescue
-        puts 'An error occurred Zetto::Storage::Tasks::ImpuretyData::Save'
+        puts 'An error occurred Zetto::Storage::ImpuretyData::Save'
         nil
       end
     end

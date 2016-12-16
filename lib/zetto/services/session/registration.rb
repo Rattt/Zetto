@@ -16,7 +16,7 @@ module Zetto::Services::Session
 
     def execute
       begin
-        if session = Zetto::Storage::Tasks::Session::Create.new(@user).execute()
+        if session = Zetto::Storage::Session::Create.new(@user).execute()
           create_cookie?(session)
         end
       rescue

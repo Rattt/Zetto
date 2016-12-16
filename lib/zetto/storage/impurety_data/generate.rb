@@ -1,4 +1,4 @@
-module Zetto::Storage::Tasks::ImpuretyData
+module Zetto::Storage::ImpuretyData
 
   class Generate
 
@@ -16,7 +16,7 @@ module Zetto::Storage::Tasks::ImpuretyData
 
         data
       rescue
-        puts 'An error occurred Zetto::Storage::Tasks::ImpuretyData::Generate'
+        puts 'An error occurred Zetto::Storage::ImpuretyData::Generate'
         nil
       end
     end

@@ -1,4 +1,4 @@
-module Zetto::Storage::Tasks::Session::Data
+module Zetto::Storage::Session::Data
 
   class Response
 

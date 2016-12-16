@@ -30,10 +30,10 @@ module Zetto::Services::Cookie
     end
 
     def get_session_from_db(token_data)
-      data_session = Zetto::Storage::Tasks::ImpuretyData::Restore.new.execute(token_data)
+      data_session = Zetto::Storage::ImpuretyData::Restore.new.execute(token_data)
 
       data_token = get_data_of_token(data_session['token'], data_session['hash_step'])
-      session = Zetto::Storage::Tasks::Session::FindBySession.new(data_token[:session_id]).execute()
+      session = Zetto::Storage::Session::FindBySession.new(data_token[:session_id]).execute()
 
       if secret_hash_correct?(session, data_session['impurity_hash'], data_token[:ciphered_impurity_hash])
         session
