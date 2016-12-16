@@ -37,11 +37,12 @@ Run installation:
 ```ruby
 rails g zetto:install
 ```
-you can change a config
+
+You can change a config
 
 ## Dependences
 
-Only for `rails` framework. And you need `redis` db in your computer
+Only for `rails` framework. And you need `redis` db in your computer.
 
 # Help
 
