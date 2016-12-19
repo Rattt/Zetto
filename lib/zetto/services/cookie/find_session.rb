@@ -46,8 +46,6 @@ module Zetto::Services::Cookie
       get_ciphered_impurity_hash(sessionObj, impurity_hash) == ciphered_impurity_hash
     end
 
-
-
   end
 
 end

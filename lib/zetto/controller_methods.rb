@@ -14,9 +14,9 @@ module Zetto
       end
     end
 
-    def authentication(name, password)
+    def authentication(class_name, name, password)
       begin
-        user = Zetto::Services::Authentication::FindUser.new(name, password).execute
+        user = Zetto::Services::Authentication::FindUser.new(class_name, name, password).execute
         return nil if user.nil?
         return nil if user.new_record?
         Zetto::Services::Session::Registration.new(user, cookies).execute
@@ -24,7 +24,8 @@ module Zetto
         puts e.message
         puts 'Invalid input arguments Zetto::ControllerMethods #authentication'
         nil
-      rescue
+      rescue Exception => e
+        puts e.message
         puts 'An error occurred Zetto::ControllerMethods #authentication'
         nil
       end

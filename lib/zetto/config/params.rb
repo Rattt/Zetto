@@ -3,7 +3,19 @@ module Zetto
 
     module Params
 
-      @user_class = ''
+      @user_classes = ['User']
+
+      @user_class_name     = 'email'
+      @user_class_password = 'password'
+      
+      @redis_connect = {:password => "3443555", "db" => 1}
+
+      @session_length = 9
+
+      @session_time_min = 30
+
+      @session_time_restart_min = 5
+
       class << self
         attr_accessor :redis_connect, :session_length, :session_time_min, :session_time_restart_min,
                       :user_class_name, :user_class_password
@@ -12,17 +24,20 @@ module Zetto
           yield self
         end
 
-        def user_class
+        def user_class(class_str)
           begin
-            @user_class.constantize
+            unless @user_classes.include?(class_str)
+              raise ArgumentError.new("Unknown target class \"#{class_str}\"")
+            end
+            class_str.constantize
           rescue Exception => e
-            puts 'Invalid input arguments, unknown target class'
+            puts e.message
             nil
           end
         end
 
-        def user_class=(user)
-          @user_class = user
+        def add_user_class=(classes)
+          @user_classes = classes
         end
 
       end
