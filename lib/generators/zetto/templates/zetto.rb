@@ -1,9 +1,6 @@
 # Simple generator for rails
 Zetto.setup do |config|
 
-  # Класс к который получаем по сессии
-  config.user_class = "User"
-
   # Поиск сесиии по этим полям
   config.user_class_name     = 'email'
   config.user_class_password = 'password'

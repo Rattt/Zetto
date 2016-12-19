@@ -2,7 +2,6 @@ module Zetto::Storage::Common
 
   class Response < Hash
 
-
     protected
 
     def deep_freeze

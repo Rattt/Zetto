@@ -17,6 +17,7 @@ module Zetto::Storage::Session
           new_session_data["user_id"]    = @user.id
           new_session_data["session_id"] = genrate_session_id
           new_session_data["algorithm"]  = generate_random_algorithm
+          new_session_data["class_name"] = @user.class.to_s
 
           if validate_session_id_uniq?(new_session_data["session_id"])
             remove_old_hash!
@@ -45,6 +46,7 @@ module Zetto::Storage::Session
       key = "session:" + new_session_data["session_id"].to_s
       @redis.hset(key, 'user_id', new_session_data["user_id"])
       @redis.hset(key, 'algorithm', new_session_data["algorithm"])
+      @redis.hset(key, 'class_name', new_session_data["class_name"])
       @redis.expire(key, time_death)
       new_session_data["time_live_s"] = time_death
       Zetto::Storage::Session::Data::Response.new(new_session_data)

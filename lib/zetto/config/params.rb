@@ -3,6 +3,8 @@ module Zetto
 
     module Params
 
+      @user_classes = ['User']
+
       @user_class_name     = 'email'
       @user_class_password = 'password'
       
@@ -22,17 +24,20 @@ module Zetto
           yield self
         end
 
-        def user_class
+        def user_class(class_str)
           begin
-            @user_class.constantize
+            unless @user_classes.include?(class_str)
+              raise ArgumentError.new("Unknown target class \"#{class_str}\"")
+            end
+            class_str.constantize
           rescue Exception => e
-            puts 'Invalid input arguments, unknown target class'
+            puts e.message
             nil
           end
         end
 
-        def user_class=(user)
-          @user_class = user
+        def add_user_class=(classes)
+          @user_classes = classes
         end
 
       end
