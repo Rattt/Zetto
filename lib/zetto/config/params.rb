@@ -3,7 +3,17 @@ module Zetto
 
     module Params
 
-      @user_class = ''
+      @user_class_name     = 'email'
+      @user_class_password = 'password'
+      
+      @redis_connect = {:password => "3443555", "db" => 1}
+
+      @session_length = 9
+
+      @session_time_min = 30
+
+      @session_time_restart_min = 5
+
       class << self
         attr_accessor :redis_connect, :session_length, :session_time_min, :session_time_restart_min,
                       :user_class_name, :user_class_password
