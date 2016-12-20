@@ -30,6 +30,7 @@ module Zetto::Services::Cookie
 
     def get_session_from_db(token_data)
       data_session = Zetto::Storage::ImpuretyData::Restore.new.execute(token_data)
+      return nil if data_session.nil?
 
       data_token = get_data_of_token(data_session['token'], data_session['hash_step'])
       session = Zetto::Storage::Session::FindBySession.new(data_token[:session_id]).execute()

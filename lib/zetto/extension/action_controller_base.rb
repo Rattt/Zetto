@@ -1,5 +1,19 @@
-module Zetto
-  module ControllerMethods
+module Zetto::Extension::ActionControllerBase
+  extend ActiveSupport::Concern
+  require "zetto/config/params"
+
+  require "zetto/storage/common/load"
+  require "zetto/storage/connect/load"
+  require "zetto/storage/impurety_data/load"
+  require "zetto/storage/session/load"
+
+  require "zetto/services/encryption/load"
+  require "zetto/services/cookie/load"
+  require "zetto/services/session/load"
+  require "zetto/services/authentication/load"
+
+
+  included do
 
     def current_user
       begin
@@ -16,7 +30,8 @@ module Zetto
 
     def authentication(class_name, name, password)
       begin
-        user = Zetto::Services::Authentication::FindUser.new(class_name, name, password).execute
+        hashed_password = Zetto::Services::Encryption::PasswordHashing.new(password).execute
+        user = Zetto::Services::Authentication::FindUser.new(class_name, name, hashed_password).execute
         return nil if user.nil?
         return nil if user.new_record?
         Zetto::Services::Session::Registration.new(user, cookies).execute
@@ -36,4 +51,5 @@ module Zetto
     end
 
   end
+
 end

@@ -5,7 +5,7 @@ module Zetto::Services::Cookie
       private
 
       def get_ciphered_impurity_hash(session_obj, impurity_hash)
-        Zetto::Storage::Session::Create::ALGORITHMS.include?(session_obj.algorithm) ?
+        Zetto::Config::Params::CRYPTO_ALGORITHMS.include?(session_obj.algorithm) ?
             "Digest::#{session_obj.algorithm}".constantize.hexdigest(impurity_hash) : Digest::SHA1.hexdigest(impurity_hash)
       end
 
