@@ -7,6 +7,7 @@ module Zetto
 
       @user_class_name     = 'email'
       @user_class_password = 'password'
+      @user_class_password_length_larger = 6
       
       @redis_connect = {:password => "3443555", "db" => 1}
 
@@ -18,7 +19,7 @@ module Zetto
 
       class << self
         attr_accessor :redis_connect, :session_length, :session_time_min, :session_time_restart_min,
-                      :user_class_name, :user_class_password
+                      :user_class_name, :user_class_password, :user_class_password_length_larger
 
         def set_params
           yield self

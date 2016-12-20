@@ -1,9 +1,14 @@
+# Add extension
+require "zetto/extension/load"
 # Simple generator for rails
 Zetto.setup do |config|
 
   # Поиск сесиии по этим полям
   config.user_class_name     = 'email'
   config.user_class_password = 'password'
+
+  # Длинна пароля, больше чем
+  config.user_class_password_length_larger = 6
 
   # Настройки для подключения к бд redis, не используем 0 бд, так-как она предназначается для тестовых нужд
   config.redis_connect = {:password => "3443555", "db" => 1}

@@ -7,7 +7,9 @@ module Zetto::Storage::ImpuretyData
         token_data_hash = JSON.parse(token_data_str)
         key_of_impurity_hash = token_data_hash.keys[0]
         redis = Zetto::Storage::Connect::RedisSingelton.get
-        data = JSON.parse(redis.get('impurity_hash_data:' + key_of_impurity_hash.to_s))
+        json_data = redis.get('impurity_hash_data:' + key_of_impurity_hash.to_s)
+        return nil if json_data.nil?
+        data = JSON.parse(json_data)
         data['token'] = token_data_hash[key_of_impurity_hash]
         data
       rescue

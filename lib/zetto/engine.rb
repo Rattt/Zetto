@@ -1,5 +1,3 @@
-require "zetto/controller_methods"
-
 module Zetto
 
   class Engine < ::Rails::Engine
@@ -12,24 +10,7 @@ module Zetto
       g.helper false
     end
 
-    ActionController::Base.class_eval do
-
-      require "zetto/config/params"
-
-      require "zetto/storage/common/load"
-      require "zetto/storage/connect/load"
-      require "zetto/storage/impurety_data/load"
-      require "zetto/storage/session/load"
-
-      require "zetto/services/cookie/load"
-      require "zetto/services/session/load"
-      require "zetto/services/authentication/load"
-
-      include Zetto::ControllerMethods
-
-    end
   end
-
 end
 
 

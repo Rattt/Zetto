@@ -15,9 +15,9 @@ Gem::Specification.new do |s|
   s.license     = "MIT"
 
   s.add_dependency "rails"
-
   s.add_dependency 'redis',   '~>3.2'
   s.add_dependency 'hiredis', '~> 0.6.0'
+#  s.add_dependency("orm_adapter", "~> 0.1")
 
   s.add_development_dependency 'rspec-rails',        "~> 3.5.2"
   s.add_development_dependency 'capybara',           "~> 2.11.0"

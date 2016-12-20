@@ -3,7 +3,7 @@ module Zetto
     module OrmHelpers
       def model_contents
         buffer = <<-CONTENT
-          zetto :database_authenticatable
+          zetto :authentication
         CONTENT
         buffer
       end
