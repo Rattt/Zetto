@@ -16,7 +16,8 @@ module Zetto::Storage::ImpuretyData
         impurity_hash_key = 'impurity_hash_data:' + key.to_s
         redis.set(impurity_hash_key, save_data.to_json)
         redis.expire(impurity_hash_key, Zetto::Config::Params.session_time_min * 60)
-      rescue
+      rescue Exception => e
+        puts e.message
         puts 'An error occurred Zetto::Storage::ImpuretyData::Save'
         nil
       end

@@ -16,7 +16,8 @@ module Zetto::Services::Cookie
         if token_data.present?
           get_session_from_db(token_data)
         end
-      rescue
+      rescue Exception => e
+        puts e.message
         puts 'An error occurred Zetto::Services::Cookie::FindSession'
         nil
       end

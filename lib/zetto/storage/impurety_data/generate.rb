@@ -15,7 +15,8 @@ module Zetto::Storage::ImpuretyData
         data['key'] = generate_key
 
         Zetto::Storage::ImpuretyData::Data::Response.new(data)
-      rescue
+      rescue Exception => e
+        puts e.message
         puts 'An error occurred Zetto::Storage::ImpuretyData::Generate'
         nil
       end

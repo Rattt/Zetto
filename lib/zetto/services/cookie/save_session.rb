@@ -24,7 +24,8 @@ module Zetto::Services::Cookie
         save_cookie(impuretyData, mixed_hash)
         Zetto::Storage::ImpuretyData::Save.new.execute(impuretyData)
         mixed_hash
-      rescue
+      rescue Exception => e
+        puts e.message
         puts 'An error occurred Zetto::Services::Cookie::SaveSession'
         nil
       end
