@@ -4,15 +4,18 @@
 
 ## Information on release
 
-It can be used as storages of sessions in your project, during creation writing of authorization or authentication.
-Will keep the object belonging to the specified class.
-If he belongs to the specified class, then we store an object.
-Add to your controller
+Allows to adjust time of life of sessions of the user
+Besides can work with several user models at once
+
+Has 3 methods in controller
 ```ruby 
-create_session_for_user(user)
+registration(class_name, name, password)
 ```
 ```ruby 
 current_user
+```
+```ruby 
+logout
 ```
 
 ## Ruby version tested
@@ -39,6 +42,12 @@ rails g zetto:install
 ```
 
 You can change a config
+
+Then we specify models with which we will work
+
+```ruby
+rails generate zetto MODEL
+```
 
 ## Dependences
 

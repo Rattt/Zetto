@@ -4,8 +4,8 @@ describe ApplicationController do
 
   describe "Check of inclusion of methods" do
 
-    it "#authentication  has to be included" do
-      expect(subject).to respond_to(:authentication)
+    it "#registration  has to be included" do
+      expect(subject).to respond_to(:registration)
     end
 
     it "#current_user  has to be included" do

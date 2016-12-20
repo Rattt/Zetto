@@ -30,7 +30,7 @@ module Zetto::Extension::ActionControllerBase
       end
     end
 
-    def authentication(class_name, name, password)
+    def registration(class_name, name, password)
       begin
         hashed_password = Zetto::Services::Encryption::PasswordHashing.new(password).execute
         user = Zetto::Services::Authentication::FindUser.new(class_name, name, hashed_password).execute
