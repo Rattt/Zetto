@@ -1,7 +1,7 @@
 module Zetto::Services::Cookie
 
   class FindSession
-    include Zetto::Services::Cookie::Modules::Crypto
+    include Zetto::Modules::Crypto
 
     def initialize(cookies)
       unless cookies.class.to_s == "ActionDispatch::Cookies::CookieJar"

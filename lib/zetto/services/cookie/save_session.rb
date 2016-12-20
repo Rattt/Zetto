@@ -1,7 +1,7 @@
 module Zetto::Services::Cookie
 
   class SaveSession
-    include Zetto::Services::Cookie::Modules::Crypto
+    include Zetto::Modules::Crypto
 
     def initialize(session, cookies)
 
@@ -19,10 +19,12 @@ module Zetto::Services::Cookie
       begin
         impuretyData = Zetto::Storage::ImpuretyData::Generate.new.execute
 
-        ciphered_impurity_hash = get_ciphered_impurity_hash(@session, impuretyData['impurity_hash'])
-        mixed_hash = get_mix_hashes(@session.session_id, ciphered_impurity_hash, impuretyData['hash_step'])
+        ciphered_impurity_hash = generate_hashing(@session.algorithm, impuretyData['impurity_hash'])
+        mixed_hash             = get_mix_hashes(@session.session_id, ciphered_impurity_hash, impuretyData['hash_step'])
+
         save_cookie(impuretyData, mixed_hash)
         Zetto::Storage::ImpuretyData::Save.new.execute(impuretyData)
+
         mixed_hash
       rescue Exception => e
         puts e.message

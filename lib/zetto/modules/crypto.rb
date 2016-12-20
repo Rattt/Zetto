@@ -1,12 +1,11 @@
-module Zetto::Services::Cookie
-  module Modules
+module Zetto::Modules
     module Crypto
 
       private
 
-      def get_ciphered_impurity_hash(session_obj, impurity_hash)
-        Zetto::Config::Params::CRYPTO_ALGORITHMS.include?(session_obj.algorithm) ?
-            "Digest::#{session_obj.algorithm}".constantize.hexdigest(impurity_hash) : Digest::SHA1.hexdigest(impurity_hash)
+      def generate_hashing(algorithm, value)
+        Zetto::Config::Params::CRYPTO_ALGORITHMS.include?(algorithm) ?
+            "Digest::#{session_obj.algorithm}".constantize.hexdigest(impurity_hash) : Digest::SHA1.hexdigest(value)
       end
 
       def get_data_of_token(token, step)
@@ -81,5 +80,4 @@ module Zetto::Services::Cookie
       end
 
     end
-  end
 end

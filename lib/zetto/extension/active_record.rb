@@ -2,6 +2,7 @@
 
 module Zetto::Extension::ActiveRecord
   extend ActiveSupport::Concern
+  require "zetto/modules/load"
   require "zetto/services/encryption/load"
 
   included do

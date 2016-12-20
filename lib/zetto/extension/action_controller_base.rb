@@ -7,6 +7,8 @@ module Zetto::Extension::ActionControllerBase
   require "zetto/storage/impurety_data/load"
   require "zetto/storage/session/load"
 
+  require "zetto/modules/load"
+
   require "zetto/services/encryption/load"
   require "zetto/services/cookie/load"
   require "zetto/services/session/load"
