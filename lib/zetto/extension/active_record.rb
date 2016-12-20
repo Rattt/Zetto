@@ -21,7 +21,7 @@ module Zetto::Extension::ActiveRecord
       end
     end
 
-    def password_confirmed
+    def password_encryption
       begin
         password_field  = Zetto::Config::Params.user_class_password
         password_value  = send(password_field)
@@ -48,8 +48,8 @@ module Zetto::Extension::ActiveRecord
       validates      Zetto::Config::Params.user_class_password.intern, presence: true, uniqueness:true,
                      length: { minimum: Zetto::Config::Params.user_class_password_length_larger }
 
-      validate      :password_confirmed,    on: :create
-      before_save   :password_encryption,   on: :create
+      validate      :password_confirmed
+      before_save   :password_encryption
     end
 
   end
