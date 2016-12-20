@@ -2,8 +2,6 @@ module Zetto::Storage::Session
 
   class Create
 
-    ALGORITHMS = ['MD5', 'SHA1', 'RMD160', 'SHA256', 'SHA384', 'SHA512']
-
     def initialize(user)
       @redis = Zetto::Storage::Connect::RedisSingelton.get
       @user = user
@@ -57,7 +55,7 @@ module Zetto::Storage::Session
     end
 
     def generate_random_algorithm
-      ALGORITHMS.sample
+      Zetto::Config::Params::CRYPTO_ALGORITHMS.sample
     end
 
     def remove_old_hash!

@@ -42,6 +42,7 @@ module ActiveRecord
         str = ""
         str << "\n      t.string :#{Zetto::Config::Params.user_class_name},     null: false"
         str << "\n      t.string :#{Zetto::Config::Params.user_class_password},  null: false"
+        str << "\n"
         str
       end
 

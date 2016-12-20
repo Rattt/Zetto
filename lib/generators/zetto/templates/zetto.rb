@@ -10,6 +10,10 @@ Zetto.setup do |config|
   # Длинна пароля, больше чем
   config.user_class_password_length_larger = 6
 
+  # Хешировать пароль с помощью
+  # ['MD5', 'SHA1', 'RMD160', 'SHA256', 'SHA384', 'SHA512']
+  config.user_class_password_crypto = 'SHA1'
+
   # Настройки для подключения к бд redis, не используем 0 бд, так-как она предназначается для тестовых нужд
   config.redis_connect = {:password => "3443555", "db" => 1}
 

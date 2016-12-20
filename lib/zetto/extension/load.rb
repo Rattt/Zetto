@@ -11,13 +11,6 @@ module Zetto::Extension
     include Zetto::Extension::ActionControllerBase
   end
 
-=begin
-  ActiveSupport.on_load :active_model do
-    require "zetto/extension/validators/check_password"
-    include Zetto::Extension::Validators
-  end
-=end
-
 end
 
 
