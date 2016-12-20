@@ -33,8 +33,8 @@ module Zetto::Services::Cookie
       data_session = Zetto::Storage::ImpuretyData::Restore.new.execute(token_data)
       return nil if data_session.nil?
 
-      data_token = get_data_of_token(data_session['token'], data_session['hash_step'])
-      session = Zetto::Storage::Session::FindBySession.new(data_token[:session_id]).execute()
+      data_token = get_data_of_token(data_session['token'], data_session['hash_step'], Zetto::Config::Params.session_length)
+      session = Zetto::Storage::Session::FindBySession.new(data_token[:session_id]).execute
 
       if secret_hash_correct?(session, data_session['impurity_hash'], data_token[:ciphered_impurity_hash])
         session
