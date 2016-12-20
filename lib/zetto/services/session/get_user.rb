@@ -13,7 +13,8 @@ module Zetto::Services::Session
     def execute
       begin
         find_user_by_cookie
-      rescue
+      rescue Exception => e
+        puts e.message
         puts 'An error occurred Zetto::Services::Session::GetUser'
         nil
       end

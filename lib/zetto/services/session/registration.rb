@@ -14,10 +14,9 @@ module Zetto::Services::Session
 
     def execute
       begin
-        if session = Zetto::Storage::Session::Create.new(@user).execute
-          create_cookie(session)
-        end
-      rescue
+        create_cookie(session) if session = Zetto::Storage::Session::Create.new(@user).execute
+      rescue Exception => e
+        puts e.message
         puts 'An error occurred Zetto::Services::Session::Registration'
         nil
       end

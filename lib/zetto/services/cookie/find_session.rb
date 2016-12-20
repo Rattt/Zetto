@@ -1,7 +1,7 @@
 module Zetto::Services::Cookie
 
   class FindSession
-    include Zetto::Services::Cookie::Modules::Crypto
+    include Zetto::Modules::Crypto
 
     def initialize(cookies)
       unless cookies.class.to_s == "ActionDispatch::Cookies::CookieJar"
@@ -16,7 +16,8 @@ module Zetto::Services::Cookie
         if token_data.present?
           get_session_from_db(token_data)
         end
-      rescue
+      rescue Exception => e
+        puts e.message
         puts 'An error occurred Zetto::Services::Cookie::FindSession'
         nil
       end
@@ -32,8 +33,8 @@ module Zetto::Services::Cookie
       data_session = Zetto::Storage::ImpuretyData::Restore.new.execute(token_data)
       return nil if data_session.nil?
 
-      data_token = get_data_of_token(data_session['token'], data_session['hash_step'])
-      session = Zetto::Storage::Session::FindBySession.new(data_token[:session_id]).execute()
+      data_token = get_data_of_token(data_session['token'], data_session['hash_step'], Zetto::Config::Params.session_length)
+      session = Zetto::Storage::Session::FindBySession.new(data_token[:session_id]).execute
 
       if secret_hash_correct?(session, data_session['impurity_hash'], data_token[:ciphered_impurity_hash])
         session

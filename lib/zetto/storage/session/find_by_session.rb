@@ -16,7 +16,8 @@ module Zetto::Storage::Session
         data['time_live_s'] = @redis.ttl(key)
         data["session_id"] = @session_id.to_s
         return Zetto::Storage::Session::Data::Response.new(data)
-      rescue
+      rescue Exception => e
+        puts e.message
         puts 'An error occurred Zetto::Storage::Session::FindBySession'
         nil
       end

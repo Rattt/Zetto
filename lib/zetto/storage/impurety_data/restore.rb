@@ -12,7 +12,8 @@ module Zetto::Storage::ImpuretyData
         data = JSON.parse(json_data)
         data['token'] = token_data_hash[key_of_impurity_hash]
         data
-      rescue
+      rescue Exception => e
+        puts e.message
         puts 'An error occurred Zetto::Storage::ImpuretyData::Restore'
         nil
       end

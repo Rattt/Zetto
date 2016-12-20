@@ -2,8 +2,8 @@
 
 module Zetto::Extension::ActiveRecord
   extend ActiveSupport::Concern
+  require "zetto/modules/load"
   require "zetto/services/encryption/load"
-
 
   included do
 
@@ -16,18 +16,20 @@ module Zetto::Extension::ActiveRecord
         errors.add(password_field.intern, "Password must be checked attribute password_confirmation") unless password_value == password_confirmation
 
         password_confirmation
-      rescue
+      rescue Exception => e
+        puts e.message
         puts "An error occurred, most likely you do not have such a field #{password_field} "
       end
     end
 
-    def password_confirmed
+    def password_encryption
       begin
         password_field  = Zetto::Config::Params.user_class_password
         password_value  = send(password_field)
         hashed_password = Zetto::Services::Encryption::PasswordHashing.new(password_value).execute
         send(password_field+'=', hashed_password)
-      rescue
+      rescue Exception => e
+        puts e.message
         puts "An error occurred, most likely you do not have such a field #{password_field} "
       end
     end
@@ -48,8 +50,8 @@ module Zetto::Extension::ActiveRecord
       validates      Zetto::Config::Params.user_class_password.intern, presence: true, uniqueness:true,
                      length: { minimum: Zetto::Config::Params.user_class_password_length_larger }
 
-      validate      :password_confirmed,    on: :create
-      before_save   :password_encryption,   on: :create
+      validate      :password_confirmed
+      before_save   :password_encryption
     end
 
   end

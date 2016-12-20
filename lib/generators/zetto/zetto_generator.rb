@@ -8,7 +8,7 @@ module Zetto
       namespace "zetto"
       source_root File.expand_path("../templates", __FILE__)
 
-      desc "Create table or add need field if exist"
+      desc "Create table or add need field if table exist"
 
       hook_for :orm
 

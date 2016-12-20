@@ -26,11 +26,7 @@ module ActiveRecord
       def inject_zetto_model_content
         content = model_contents
 
-        class_path = if namespaced?
-                       class_name.to_s.split("::")
-                     else
-                       [class_name]
-                     end
+        class_path = namespaced? ? class_name.to_s.split("::") : [class_name]
 
         indent_depth = class_path.size - 1
         content = content.split("\n").map { |line| "  " * indent_depth + line }.join("\n") << "\n"

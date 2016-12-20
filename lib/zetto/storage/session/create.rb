@@ -23,7 +23,8 @@ module Zetto::Storage::Session
           end
         end
         nil
-      rescue
+      rescue Exception => e
+        puts e.message
         puts 'An error occurred Zetto::Storage::Session::Create'
         nil
       end
