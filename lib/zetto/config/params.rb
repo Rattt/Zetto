@@ -22,6 +22,7 @@ module Zetto
         attr_accessor :redis_connect, :session_length, :session_time_min, :session_time_restart_min,
                       :user_class_name, :user_class_password, :user_class_password_length_larger,
                       :user_class_password_crypto
+        attr_writer   :user_classes
 
         def set_params
           yield self
@@ -37,10 +38,6 @@ module Zetto
             puts e.message
             nil
           end
-        end
-
-        def add_user_class=(classes)
-          @user_classes = classes
         end
 
       end
