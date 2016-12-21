@@ -2,7 +2,7 @@ module Zetto::Storage::Session::Data
 
   class Response < Zetto::Storage::Common::Response
 
-    attr_reader :session_id, :user_id, :algorithm, :class_name, :time_live_s
+    attr_reader :session_id, :user_id, :algorithm, :class_name, :time_live_s, :user_agent, :remote_ip
 
     def initialize(data)
       @session_id  = data["session_id"]
@@ -10,12 +10,16 @@ module Zetto::Storage::Session::Data
       @algorithm   = data["algorithm"]
       @class_name  = data["class_name"]
       @time_live_s = data["time_live_s"]
+      @user_agent  = data["user_agent"]
+      @remote_ip    = data["remote_ip"]
 
       self['session_id']  = data["session_id"]
       self['user_id']     = data["user_id"]
       self['algorithm']   = data["algorithm"]
       self['class_name']  = data["class_name"]
       self['time_live_s'] = data["time_live_s"]
+      self['user_agent']  = data["user_agent"]
+      self['remote_ip']    = data["remote_ip"]
 
       deep_freeze
     end

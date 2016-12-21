@@ -2,12 +2,14 @@ module Zetto::Services::Session
 
   class GetUser
 
-    def initialize(cookies)
+    def initialize(cookies, user_agent, remote_ip)
       unless cookies.class.to_s == "ActionDispatch::Cookies::CookieJar"
         raise ArgumentError.new('To save session cookies needed, object of ActionDispatch::Cookies::CookieJar')
       end
 
-      @cookies = cookies
+      @cookies    = cookies
+      @user_agent = user_agent
+      @remote_ip  = remote_ip
     end
 
     def execute
@@ -26,8 +28,12 @@ module Zetto::Services::Session
       session = Zetto::Services::Cookie::FindSession.new(@cookies).execute
       return nil if session.nil?
       user = session.user rescue nil
+      return nil unless Digest::MD5.hexdigest(@user_agent) == session['user_agent']
+      if Zetto::Config::Params.check_ip == true && @remote_ip != session['remote_ip']
+        return nil
+      end
       if session.soon_rotten?
-        session = Zetto::Storage::Session::Create.new(user).execute
+        session = Zetto::Storage::Session::Create.new(user, @user_agent, @remote_ip).execute
         Zetto::Services::Cookie::SaveSession.new(session, @cookies).execute
       end
       user

@@ -2,9 +2,11 @@ module Zetto::Storage::Session
 
   class Create
 
-    def initialize(user)
+    def initialize(user, user_agent, remote_ip)
       @redis = Zetto::Storage::Connect::RedisSingelton.get
       @user = user
+      @user_agent = user_agent
+      @remote_ip = remote_ip
     end
 
     def execute
@@ -16,6 +18,8 @@ module Zetto::Storage::Session
           new_session_data["session_id"] = genrate_session_id
           new_session_data["algorithm"]  = generate_random_algorithm
           new_session_data["class_name"] = @user.class.to_s
+          new_session_data["user_agent"] = Digest::MD5.hexdigest(@user_agent)
+          new_session_data["remote_ip"]  = @remote_ip
 
           if validate_session_id_uniq?(new_session_data["session_id"])
             remove_old_hash!
@@ -46,6 +50,8 @@ module Zetto::Storage::Session
       @redis.hset(key, 'user_id', new_session_data["user_id"])
       @redis.hset(key, 'algorithm', new_session_data["algorithm"])
       @redis.hset(key, 'class_name', new_session_data["class_name"])
+      @redis.hset(key, 'user_agent', new_session_data["user_agent"])
+      @redis.hset(key, 'remote_ip',  new_session_data["remote_ip"]) if Zetto::Config::Params.check_ip == true
       @redis.expire(key, time_death)
       new_session_data["time_live_s"] = time_death
       Zetto::Storage::Session::Data::Response.new(new_session_data)
