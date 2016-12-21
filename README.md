@@ -31,6 +31,7 @@
    rails g zetto:install
    ```
 5. Добавляем вашу модель в список `config.user_classes` и запускаем генератор для этой модели
+
    ```ruby
    rails g zetto YourModel
    ```  
