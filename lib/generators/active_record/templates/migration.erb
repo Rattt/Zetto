@@ -3,7 +3,9 @@ class ZettoCreate<%= table_name.camelize %> < ActiveRecord::Migration<%= migrati
     create_table :<%= table_name %> do |t|
       t.string :name
       t.text :description
-      <%= migration_data -%>
     end
+    <% migration_data.each do |name, properties| %>
+        add_column :<%= table_name %>, :<%= name %>, <%= properties %> unless column_exists? :<%= table_name %>, :<%= name %>
+    <% end %>
   end
 end
