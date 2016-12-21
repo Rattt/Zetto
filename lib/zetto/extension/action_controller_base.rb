@@ -19,7 +19,7 @@ module Zetto::Extension::ActionControllerBase
 
     def current_user
       begin
-        Zetto::Services::Session::GetUser.new(cookies).execute
+        Zetto::Services::Session::GetUser.new(cookies, request.user_agent, request.remote_ip).execute
       rescue ArgumentError => e
         puts e.message
         puts 'Invalid input arguments Zetto::ControllerMethods #current_user'
@@ -36,7 +36,7 @@ module Zetto::Extension::ActionControllerBase
         user = Zetto::Services::Authentication::FindUser.new(class_name, name, hashed_password).execute
         return nil if user.nil?
         return nil if user.new_record?
-        Zetto::Services::Session::Registration.new(user, cookies).execute
+        Zetto::Services::Session::Registration.new(user, cookies, request.user_agent, request.remote_ip).execute
       rescue ArgumentError => e
         puts e.message
         puts 'Invalid input arguments Zetto::ControllerMethods #authentication'
