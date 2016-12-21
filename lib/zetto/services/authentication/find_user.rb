@@ -1,10 +1,9 @@
 module Zetto::Services::Authentication
 
   class FindUser
-    include Zetto::Services::Cookie::Modules::Crypto
+    include Zetto::Modules::Crypto
 
     def initialize(class_name, name, password)
-
       @user_class = Zetto::Config::Params.user_class(class_name)
       access_attributes = [Zetto::Config::Params.user_class_name, Zetto::Config::Params.user_class_password]
       unless @user_class.column_names & access_attributes == access_attributes

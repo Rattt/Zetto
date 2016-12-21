@@ -5,7 +5,7 @@ module Zetto::Modules
 
       def generate_hashing(algorithm, value)
         Zetto::Config::Params::CRYPTO_ALGORITHMS.include?(algorithm) ?
-            "Digest::#{session_obj.algorithm}".constantize.hexdigest(impurity_hash) : Digest::SHA1.hexdigest(value)
+            "Digest::#{algorithm}".constantize.hexdigest(value) : Digest::SHA1.hexdigest(value)
       end
 
       def get_data_of_token(token, step, count_of_session)

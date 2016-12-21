@@ -47,7 +47,8 @@ module Zetto::Extension::ActiveRecord
 
     def zetto_authentication
       attr_accessor :password_confirmation
-      validates      Zetto::Config::Params.user_class_password.intern, presence: true, uniqueness:true,
+      validates      Zetto::Config::Params.user_class_name.intern, uniqueness:true
+      validates      Zetto::Config::Params.user_class_password.intern, presence: true,
                      length: { minimum: Zetto::Config::Params.user_class_password_length_larger }
 
       validate      :password_confirmed

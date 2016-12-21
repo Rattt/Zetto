@@ -35,11 +35,12 @@ module ActiveRecord
       end
 
       def migration_data
-        str = ""
-        str << "\n      t.string :#{Zetto::Config::Params.user_class_name},     null: false"
-        str << "\n      t.string :#{Zetto::Config::Params.user_class_password},  null: false"
-        str << "\n"
-        str
+        fields = {}
+        key = Zetto::Config::Params.user_class_name
+        fields[key] = ":string,  :null => false, default: ''"
+        key = Zetto::Config::Params.user_class_password
+        fields[key] = ":string,  :null => false, default: ''"
+        fields
       end
 
       def rails5?

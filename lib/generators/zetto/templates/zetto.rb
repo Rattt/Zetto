@@ -3,6 +3,8 @@ require "zetto/extension/load"
 # Simple generator for rails
 Zetto.setup do |config|
 
+  # Список пользовательских классов
+  config.user_classes = ['User']
   # Поиск сесиии по этим полям
   config.user_class_name     = 'email'
   config.user_class_password = 'password'

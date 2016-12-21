@@ -9,7 +9,7 @@ Besides can work with several user models at once
 
 Has 3 methods in controller
 ```ruby 
-registration(class_name, name, password)
+authorization(class_name, name, password)
 ```
 ```ruby 
 current_user

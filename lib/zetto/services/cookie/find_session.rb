@@ -36,16 +36,16 @@ module Zetto::Services::Cookie
       data_token = get_data_of_token(data_session['token'], data_session['hash_step'], Zetto::Config::Params.session_length)
       session = Zetto::Storage::Session::FindBySession.new(data_token[:session_id]).execute
 
-      if secret_hash_correct?(session, data_session['impurity_hash'], data_token[:ciphered_impurity_hash])
+      if secret_hash_correct?(session, data_session['impurity_hash'], data_token[:ciphered_hash])
         session
       end
 
       session
     end
 
-    def secret_hash_correct?(sessionObj, impurity_hash, ciphered_impurity_hash)
-      return false if sessionObj.nil?
-      get_ciphered_impurity_hash(sessionObj, impurity_hash) == ciphered_impurity_hash
+    def secret_hash_correct?(session, impurity_hash, ciphered_hash)
+      return false if session.nil?
+      generate_hashing(session.algorithm, impurity_hash) == ciphered_hash
     end
 
   end
