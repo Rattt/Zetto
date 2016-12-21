@@ -11,6 +11,8 @@ module Zetto::Extension
     include Zetto::Extension::ActionControllerBase
   end
 
+  autoload :ZettoLogger, 'zetto/extension/zetto_logger'
+
 end
 
 
