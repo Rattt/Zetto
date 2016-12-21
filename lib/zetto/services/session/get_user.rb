@@ -34,7 +34,7 @@ module Zetto::Services::Session
       end
       if Zetto::Config::Params.log
         logger = Zetto::Extension::ZettoLogger.instance
-        logger.info('initialize') { "User \"#{user[Zetto::Config::Params.user_class_name]}\" from model \"#{user.class}\" and ip \"#{@remote_ip}\" it was connected at #{Time.now.to_s}" }
+        logger.info('initialize') { "User \"#{user[Zetto::Config::Params.user_class_name]}\" from model \"#{user.class}\" and ip \"#{@remote_ip}\"  has been connected." }
       end
       if session.soon_rotten?
         session = Zetto::Storage::Session::Create.new(user, @user_agent, @remote_ip).execute
