@@ -13,12 +13,21 @@
 
 ActiveRecord::Schema.define(version: 20161212071439) do
 
-  create_table "zetto_sessions", force: :cascade do |t|
-    t.integer  "user_id",                           null: false
-    t.string   "session_id", limit: 9,              null: false
-    t.integer  "algorithm",  limit: 50, default: 0, null: false
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+  create_table "users", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  create_table "cats", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password"
+    t.string   "password_confirmation"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
 end

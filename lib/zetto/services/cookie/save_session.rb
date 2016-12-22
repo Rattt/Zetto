@@ -22,10 +22,10 @@ module Zetto::Services::Cookie
         ciphered_impurity_hash = generate_hashing(@session.algorithm, impuretyData['impurity_hash'])
         mixed_hash             = get_mix_hashes(@session.session_id, ciphered_impurity_hash, impuretyData['hash_step'])
 
-        save_cookie(impuretyData, mixed_hash)
+        value = save_cookie(impuretyData, mixed_hash)
         Zetto::Storage::ImpuretyData::Save.new.execute(impuretyData)
 
-        mixed_hash
+        value
       rescue Exception => e
         puts e.message
         puts 'An error occurred Zetto::Services::Cookie::SaveSession'
