@@ -11,10 +11,12 @@ module Zetto::Extension
     include Zetto::Extension::ActionControllerBase
   end
 
-  autoload :ZettoLogger, 'zetto/extension/zetto_logger'
-
 end
 
+
+module Zetto::Services
+  autoload :ZettoLogger, 'zetto/services/zetto_logger'
+end
 
 
 

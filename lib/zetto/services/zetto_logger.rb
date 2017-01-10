@@ -1,4 +1,4 @@
-module Zetto::Extension
+module Zetto::Services
 
   class ZettoLogger < Logger
     include Singleton

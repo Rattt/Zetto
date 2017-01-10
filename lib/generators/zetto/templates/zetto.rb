@@ -1,5 +1,5 @@
 # Add extension
-require "zetto/extension/load"
+require "zetto/load"
 # Simple generator for rails
 Zetto.setup do |config|
 
