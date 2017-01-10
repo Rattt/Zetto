@@ -16,8 +16,8 @@ module Zetto::Services::Session
       begin
         find_user_by_cookie
       rescue Exception => e
-        puts e.message
-        puts 'An error occurred Zetto::Services::Session::GetUser'
+        Zetto::Modules::Info.error_message e.message
+        Zetto::Modules::Info.error_message I18n.t('exseptions.unknown_error', argument: 'Zetto::Services::Session::GetUser', current_method: __method__)
         nil
       end
     end

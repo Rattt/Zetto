@@ -1,0 +1,7 @@
+en:
+  exseptions:
+            invalid_arguments: 'Invalid input arguments %{argument} #%{current_method}'
+            unknown_error:     'An error occurred %{argument} #%{current_method}'
+            undefined_field:   'An error occurred, most likely you do not have such a field "%{field}"'
+  validate:
+            password_confirm:  'Password must be checked attribute password_confirmation'

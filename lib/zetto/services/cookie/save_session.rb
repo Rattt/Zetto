@@ -27,8 +27,8 @@ module Zetto::Services::Cookie
 
         value
       rescue Exception => e
-        puts e.message
-        puts 'An error occurred Zetto::Services::Cookie::SaveSession'
+        Zetto::Modules::Info.error_message e.message
+        Zetto::Modules::Info.error_message I18n.t('exseptions.unknown_error', argument: 'Zetto::Services::Cookie::SaveSession', current_method: __method__)
         nil
       end
     end

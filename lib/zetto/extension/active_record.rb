@@ -13,14 +13,16 @@ module Zetto::Extension::ActiveRecord
       begin
         password_field  = Zetto::Config::Params.user_class_password
         password_value  = send(password_field).to_s
-        errors.add(password_field.intern, "Password must be checked attribute password_confirmation") unless password_value == password_confirmation
+        errors.add(password_field.intern, I18n.t('validate.password_confirm')) unless password_value == password_confirmation
 
         password_confirmation
       rescue Exception => e
-        puts e.message
-        puts "An error occurred, most likely you do not have such a field #{password_field} "
+        Zetto::Modules::Info.error_message e.message
+        Zetto::Modules::Info.error_message I18n.t('exseptions.undefined_field', field: password_field)
       end
     end
+
+    validate.undefined_field
 
     def password_encryption
       begin
@@ -29,8 +31,8 @@ module Zetto::Extension::ActiveRecord
         hashed_password = Zetto::Services::Encryption::PasswordHashing.new(password_value).execute
         send(password_field+'=', hashed_password)
       rescue Exception => e
-        puts e.message
-        puts "An error occurred, most likely you do not have such a field #{password_field} "
+        Zetto::Modules::Info.error_message e.message
+        Zetto::Modules::Info.error_message I18n.t('exseptions.undefined_field', field: password_field)
       end
     end
 

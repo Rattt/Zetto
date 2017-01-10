@@ -21,11 +21,12 @@ module Zetto::Extension::ActionControllerBase
       begin
         Zetto::Services::Session::GetUser.new(cookies, request.user_agent, request.remote_ip).execute
       rescue ArgumentError => e
-        puts e.message
-        puts 'Invalid input arguments Zetto::ControllerMethods #current_user'
+        Zetto::Modules::Info.error_message e.message
+        Zetto::Modules::Info.error_message I18n.t('exseptions.invalid_arguments', argument: 'Zetto::ControllerMethods', current_method: __method__)
         nil
-      rescue
-        puts 'An error occurred Zetto::ControllerMethods #current_user'
+      rescue Exception => e
+        Zetto::Modules::Info.error_message e.message
+        Zetto::Modules::Info.error_message I18n.t('exseptions.unknown_error', argument: 'Zetto::ControllerMethods', current_method: __method__)
         nil
       end
     end
@@ -38,12 +39,12 @@ module Zetto::Extension::ActionControllerBase
         return nil if user.new_record?
         Zetto::Services::Session::Registration.new(user, cookies, request.user_agent, request.remote_ip).execute
       rescue ArgumentError => e
-        puts e.message
-        puts 'Invalid input arguments Zetto::ControllerMethods #authentication'
+        Zetto::Modules::Info.error_message e.message
+        Zetto::Modules::Info.error_message I18n.t('exseptions.invalid_arguments', argument: 'Zetto::ControllerMethods', current_method: __method__)
         nil
       rescue Exception => e
-        puts e.message
-        puts 'An error occurred Zetto::ControllerMethods #authentication'
+        Zetto::Modules::Info.error_message e.message
+        Zetto::Modules::Info.error_message I18n.t('exseptions.unknown_error', argument: 'Zetto::ControllerMethods', current_method: __method__)
         nil
       end
     end

@@ -13,8 +13,8 @@ module Zetto::Storage::ImpuretyData
         data['token'] = token_data_hash[key_of_impurity_hash]
         data
       rescue Exception => e
-        puts e.message
-        puts 'An error occurred Zetto::Storage::ImpuretyData::Restore'
+        Zetto::Modules::Info.error_message e.message
+        Zetto::Modules::Info.error_message I18n.t('exseptions.unknown_error', argument: 'Zetto::Storage::ImpuretyData::Restore', current_method: __method__)
         nil
       end
     end

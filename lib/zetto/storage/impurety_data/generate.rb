@@ -16,8 +16,8 @@ module Zetto::Storage::ImpuretyData
 
         Zetto::Storage::ImpuretyData::Data::Response.new(data)
       rescue Exception => e
-        puts e.message
-        puts 'An error occurred Zetto::Storage::ImpuretyData::Generate'
+        Zetto::Modules::Info.error_message e.message
+        Zetto::Modules::Info.error_message I18n.t('exseptions.unknown_error', argument: 'Zetto::Storage::ImpuretyData::Generate', current_method: __method__)
         nil
       end
     end

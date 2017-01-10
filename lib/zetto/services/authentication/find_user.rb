@@ -1,6 +1,7 @@
 module Zetto::Services::Authentication
 
   class FindUser
+
     include Zetto::Modules::Crypto
 
     def initialize(class_name, name, password)
@@ -15,15 +16,13 @@ module Zetto::Services::Authentication
     end
 
     def execute
-      begin
-        name = Zetto::Config::Params.user_class_name
-        password = Zetto::Config::Params.user_class_password
-        @user_class.where("#{name} = ? AND #{password} = ?", @name, @password).first
-      rescue Exception => e
-        puts e.message
-        puts 'An error occurred Zetto::Services::Authentication::FindUser'
-        nil
-      end
+      name = Zetto::Config::Params.user_class_name
+      password = Zetto::Config::Params.user_class_password
+      @user_class.where("#{name} = ? AND #{password} = ?", @name, @password).first
+    rescue Exception => e
+      Zetto::Modules::Info.error_message e.message
+      Zetto::Modules::Info.error_message I18n.t('exseptions.unknown_error', argument: 'Zetto::Services::Authentication::FindUser', current_method: __method__)
+      nil
     end
 
   end

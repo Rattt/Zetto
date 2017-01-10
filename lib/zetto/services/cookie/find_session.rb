@@ -17,8 +17,8 @@ module Zetto::Services::Cookie
           get_session_from_db(token_data)
         end
       rescue Exception => e
-        puts e.message
-        puts 'An error occurred Zetto::Services::Cookie::FindSession'
+        Zetto::Modules::Info.error_message e.message
+        Zetto::Modules::Info.error_message I18n.t('exseptions.unknown_error', argument: 'Zetto::Services::Cookie::FindSession', current_method: __method__)
         nil
       end
     end

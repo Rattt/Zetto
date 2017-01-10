@@ -8,13 +8,11 @@ module Zetto::Services::Encryption
     end
 
     def execute
-      begin
-        generate_hashing(Zetto::Config::Params.user_class_password_crypto, @password)
-      rescue Exception => e
-        puts e.message
-        puts 'An error occurred Zetto::Services::Encryption::PasswordHashing'
-        nil
-      end
+      generate_hashing(Zetto::Config::Params.user_class_password_crypto, @password)
+    rescue Exception => e
+      Zetto::Modules::Info.error_message e.message
+      Zetto::Modules::Info.error_message I18n.t('exseptions.unknown_error', argument: 'Zetto::Services::Encryption::PasswordHashing', current_method: __method__)
+      nil
     end
 
   end

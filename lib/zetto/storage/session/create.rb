@@ -28,8 +28,8 @@ module Zetto::Storage::Session
         end
         nil
       rescue Exception => e
-        puts e.message
-        puts 'An error occurred Zetto::Storage::Session::Create'
+        Zetto::Modules::Info.error_message e.message
+        Zetto::Modules::Info.error_message I18n.t('exseptions.unknown_error', argument: 'Zetto::Storage::Session::Create', current_method: __method__)
         nil
       end
     end
