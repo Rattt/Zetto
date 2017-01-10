@@ -4,7 +4,7 @@ module Zetto::Modules
     require 'colorize'
 
       class << self
-        def error_message(message)
+        def error_message(message, error = nil)
           $stderr.puts message.colorize(:red)
         end
 

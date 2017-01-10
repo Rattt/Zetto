@@ -16,21 +16,20 @@ module Zetto::Services::Cookie
     end
 
     def execute
-      begin
-        impuretyData = Zetto::Storage::ImpuretyData::Generate.new.execute
 
-        ciphered_impurity_hash = generate_hashing(@session.algorithm, impuretyData['impurity_hash'])
-        mixed_hash             = get_mix_hashes(@session.session_id, ciphered_impurity_hash, impuretyData['hash_step'])
+      impuretyData = Zetto::Storage::ImpuretyData::Generate.new.execute
 
-        value = save_cookie(impuretyData, mixed_hash)
-        Zetto::Storage::ImpuretyData::Save.new.execute(impuretyData)
+      ciphered_impurity_hash = generate_hashing(@session.algorithm, impuretyData['impurity_hash'])
+      mixed_hash = get_mix_hashes(@session.session_id, ciphered_impurity_hash, impuretyData['hash_step'])
 
-        value
-      rescue Exception => e
-        Zetto::Modules::Info.error_message e.message
-        Zetto::Modules::Info.error_message I18n.t('exseptions.unknown_error', argument: 'Zetto::Services::Cookie::SaveSession', current_method: __method__)
-        nil
-      end
+      value = save_cookie(impuretyData, mixed_hash)
+      Zetto::Storage::ImpuretyData::Save.new.execute(impuretyData)
+
+      value
+    rescue Exception => e
+      Zetto::Services::Info.error_message I18n.t('exseptions.unknown_error', argument: 'Zetto::Services::Cookie::SaveSession', current_method: __method__), e
+      nil
+
     end
 
     private

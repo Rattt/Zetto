@@ -17,8 +17,7 @@ module Zetto::Storage::Session
         data["session_id"] = @session_id.to_s
         return Zetto::Storage::Session::Data::Response.new(data)
       rescue Exception => e
-        Zetto::Modules::Info.error_message e.message
-        Zetto::Modules::Info.error_message I18n.t('exseptions.unknown_error', argument: 'Zetto::Storage::Session::FindBySession', current_method: __method__)
+        Zetto::Services::Info.error_message I18n.t('exseptions.unknown_error', argument: 'Zetto::Storage::Session::FindBySession', current_method: __method__), e
         nil
       end
     end

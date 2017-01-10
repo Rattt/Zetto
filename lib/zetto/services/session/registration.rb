@@ -19,8 +19,7 @@ module Zetto::Services::Session
         create_cookie(session)
       end
     rescue Exception => e
-      Zetto::Modules::Info.error_message e.message
-      Zetto::Modules::Info.error_message I18n.t('exseptions.unknown_error', argument: 'Zetto::Services::Session::Registration', current_method: __method__)
+      Zetto::Services::Info.error_message I18n.t('exseptions.unknown_error', argument: 'Zetto::Services::Session::Registration', current_method: __method__), e
       nil
     end
 

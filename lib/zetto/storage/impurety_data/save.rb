@@ -16,8 +16,7 @@ module Zetto::Storage::ImpuretyData
       redis.set(impurity_hash_key, save_data.to_json)
       redis.expire(impurity_hash_key, Zetto::Config::Params.session_time_min * 60)
     rescue Exception => e
-      Zetto::Modules::Info.error_message e.message
-      Zetto::Modules::Info.error_message I18n.t('exseptions.unknown_error', argument: 'Zetto::Storage::ImpuretyData::Save', current_method: __method__)
+      Zetto::Services::Info.error_message I18n.t('exseptions.unknown_error', argument: 'Zetto::Storage::ImpuretyData::Save', current_method: __method__), e
       nil
     end
 

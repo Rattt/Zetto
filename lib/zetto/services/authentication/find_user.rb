@@ -20,8 +20,7 @@ module Zetto::Services::Authentication
       password = Zetto::Config::Params.user_class_password
       @user_class.where("#{name} = ? AND #{password} = ?", @name, @password).first
     rescue Exception => e
-      Zetto::Modules::Info.error_message e.message
-      Zetto::Modules::Info.error_message I18n.t('exseptions.unknown_error', argument: 'Zetto::Services::Authentication::FindUser', current_method: __method__)
+      Zetto::Services::Info.error_message I18n.t('exseptions.unknown_error', argument: 'Zetto::Services::Authentication::FindUser', current_method: __method__), e
       nil
     end
 

@@ -21,12 +21,10 @@ module Zetto::Extension::ActionControllerBase
       begin
         Zetto::Services::Session::GetUser.new(cookies, request.user_agent, request.remote_ip).execute
       rescue ArgumentError => e
-        Zetto::Modules::Info.error_message e.message
-        Zetto::Modules::Info.error_message I18n.t('exseptions.invalid_arguments', argument: 'Zetto::ControllerMethods', current_method: __method__)
+        Zetto::Services::Info.error_message I18n.t('exseptions.invalid_arguments', argument: 'Zetto::ControllerMethods', current_method: __method__), e
         nil
       rescue Exception => e
-        Zetto::Modules::Info.error_message e.message
-        Zetto::Modules::Info.error_message I18n.t('exseptions.unknown_error', argument: 'Zetto::ControllerMethods', current_method: __method__)
+        Zetto::Services::Info.error_message I18n.t('exseptions.unknown_error', argument: 'Zetto::ControllerMethods', current_method: __method__), e
         nil
       end
     end
@@ -39,12 +37,10 @@ module Zetto::Extension::ActionControllerBase
         return nil if user.new_record?
         Zetto::Services::Session::Registration.new(user, cookies, request.user_agent, request.remote_ip).execute
       rescue ArgumentError => e
-        Zetto::Modules::Info.error_message e.message
-        Zetto::Modules::Info.error_message I18n.t('exseptions.invalid_arguments', argument: 'Zetto::ControllerMethods', current_method: __method__)
+        Zetto::Services::Info.error_message I18n.t('exseptions.invalid_arguments', argument: 'Zetto::ControllerMethods', current_method: __method__), e
         nil
       rescue Exception => e
-        Zetto::Modules::Info.error_message e.message
-        Zetto::Modules::Info.error_message I18n.t('exseptions.unknown_error', argument: 'Zetto::ControllerMethods', current_method: __method__)
+        Zetto::Services::Info.error_message I18n.t('exseptions.unknown_error', argument: 'Zetto::ControllerMethods', current_method: __method__), e
         nil
       end
     end

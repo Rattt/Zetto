@@ -7,19 +7,17 @@ module Zetto::Storage::ImpuretyData
     end
 
     def execute
-      begin
-        remove_old_hash!
-        data = {}
-        data['hash_step'] = generate_step
-        data['impurity_hash'] = generate_hash
-        data['key'] = generate_key
 
-        Zetto::Storage::ImpuretyData::Data::Response.new(data)
-      rescue Exception => e
-        Zetto::Modules::Info.error_message e.message
-        Zetto::Modules::Info.error_message I18n.t('exseptions.unknown_error', argument: 'Zetto::Storage::ImpuretyData::Generate', current_method: __method__)
-        nil
-      end
+      remove_old_hash!
+      data = {}
+      data['hash_step'] = generate_step
+      data['impurity_hash'] = generate_hash
+      data['key'] = generate_key
+
+      Zetto::Storage::ImpuretyData::Data::Response.new(data)
+    rescue Exception => e
+      Zetto::Services::Info.error_message I18n.t('exseptions.unknown_error', argument: 'Zetto::Storage::ImpuretyData::Generate', current_method: __method__), e
+      nil
     end
 
     private

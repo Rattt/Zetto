@@ -7,19 +7,16 @@ module Zetto::Services::Session
         raise ArgumentError.new('To save session cookies needed, object of ActionDispatch::Cookies::CookieJar')
       end
 
-      @cookies    = cookies
+      @cookies = cookies
       @user_agent = user_agent
-      @remote_ip  = remote_ip
+      @remote_ip = remote_ip
     end
 
     def execute
-      begin
-        find_user_by_cookie
-      rescue Exception => e
-        Zetto::Modules::Info.error_message e.message
-        Zetto::Modules::Info.error_message I18n.t('exseptions.unknown_error', argument: 'Zetto::Services::Session::GetUser', current_method: __method__)
-        nil
-      end
+      find_user_by_cookie
+    rescue Exception => e
+      Zetto::Services::Info.error_message I18n.t('exseptions.unknown_error', argument: 'Zetto::Services::Session::GetUser', current_method: __method__), e
+      nil
     end
 
     private

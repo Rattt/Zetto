@@ -11,16 +11,13 @@ module Zetto::Services::Cookie
     end
 
     def execute
-      begin
-        token_data = get_token_from_cookies
-        if token_data.present?
-          get_session_from_db(token_data)
-        end
-      rescue Exception => e
-        Zetto::Modules::Info.error_message e.message
-        Zetto::Modules::Info.error_message I18n.t('exseptions.unknown_error', argument: 'Zetto::Services::Cookie::FindSession', current_method: __method__)
-        nil
+      token_data = get_token_from_cookies
+      if token_data.present?
+        get_session_from_db(token_data)
       end
+    rescue Exception => e
+      Zetto::Services::Info.error_message I18n.t('exseptions.unknown_error', argument: 'Zetto::Services::Cookie::FindSession', current_method: __method__), e
+      nil
     end
 
     private

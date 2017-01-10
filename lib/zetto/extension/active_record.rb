@@ -17,8 +17,7 @@ module Zetto::Extension::ActiveRecord
 
         password_confirmation
       rescue Exception => e
-        Zetto::Modules::Info.error_message e.message
-        Zetto::Modules::Info.error_message I18n.t('exseptions.undefined_field', field: password_field)
+        Zetto::Services::Info.error_message I18n.t('exseptions.undefined_field', field: password_field), e
       end
     end
 
@@ -31,8 +30,7 @@ module Zetto::Extension::ActiveRecord
         hashed_password = Zetto::Services::Encryption::PasswordHashing.new(password_value).execute
         send(password_field+'=', hashed_password)
       rescue Exception => e
-        Zetto::Modules::Info.error_message e.message
-        Zetto::Modules::Info.error_message I18n.t('exseptions.undefined_field', field: password_field)
+        Zetto::Services::Info.error_message I18n.t('exseptions.undefined_field', field: password_field), e
       end
     end
 
