@@ -21,8 +21,6 @@ module Zetto::Extension::ActiveRecord
       end
     end
 
-    validate.undefined_field
-
     def password_encryption
       begin
         password_field  = Zetto::Config::Params.user_class_password

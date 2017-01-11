@@ -15,7 +15,7 @@ end
 
 module Zetto::Services
   autoload :ZettoLogger, 'zetto/services/zetto_logger'
-  autoload :Info, 'zetto/modules/info'
+  autoload :Info, 'zetto/services/info'
 end
 
 

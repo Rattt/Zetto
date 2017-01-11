@@ -7,11 +7,14 @@ en:
             need_cookie:               'To save session cookies needed, object of ActionDispatch::Cookies::CookieJar'
             isnt_object:               "Isn\'t an object of %{class_name}"
             save_session_cookies:      'To save session cookies needed, object of ActionDispatch::Cookies::CookieJar'
+            unknown_algorithm:         'Unknown algorithm "%{algorithm}"'
+            unknown_target_class:      'Unknown target class "%{class_name}"'
   validate:
             password_confirm:  'Password must be checked attribute password_confirmation'
 
   log:
-      connect: User conected
+      connect: 'User conected:'
+      error:   'Error info:'
 
   connect:
           success: 'User "%{field_name}" from model "%{class_name}" and ip "%{ip}"  has been connected."'

@@ -33,7 +33,7 @@ module Zetto
         def user_class_password_crypto=(value)
           value = value.to_s.upcase
           unless self::CRYPTO_ALGORITHMS.include?(value)
-            raise ArgumentError.new("Unknown algorithm \"#{value}\"")
+            raise ArgumentError.new(I18n.t('exseptions.unknown_algorithm', algorithm: value.to_s ))
           end
           @user_class_password_crypto = value
         end
@@ -45,7 +45,7 @@ module Zetto
         def user_class(class_str)
           begin
             unless @user_classes.include?(class_str)
-              raise ArgumentError.new("Unknown target class \"#{class_str}\"")
+              raise ArgumentError.new(I18n.t('exseptions.unknown_target_class', class_name: class_str.to_s ))
             end
             class_str.constantize
           rescue Exception => e

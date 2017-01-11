@@ -1,4 +1,4 @@
-module Zetto::Modules
+module Zetto::Services
 
   module Info
 
@@ -7,7 +7,10 @@ module Zetto::Modules
 
         def error_message(message, error = nil)
           if !error.nil? && error.is_a?(StandardError)
-
+            if Zetto::Config::Params.log
+              logger = Zetto::Services::ZettoLogger.instance
+              logger.fatal { I18n.t('log.error') + "\n" + message + "\n" + error.message }
+            end
           else
             $stderr.puts message
           end

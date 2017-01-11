@@ -30,8 +30,8 @@ module Zetto::Services::Session
         return nil
       end
       if Zetto::Config::Params.log
-        logger = Zetto::Extension::ZettoLogger.instance
-        logger.info(I18n.t('log.connect')) { I18n.t('connect.success', field_name: user[Zetto::Config::Params.user_class_name], class_name: user.class.to_s, ip: @remote_ip.to_s) }
+        logger = Zetto::Services::ZettoLogger.instance
+        logger.info { I18n.t('log.connect')+" "+I18n.t('connect.success', field_name: user[Zetto::Config::Params.user_class_name], class_name: user.class.to_s, ip: @remote_ip.to_s) }
       end
       if session.soon_rotten?
         session = Zetto::Storage::Session::Create.new(user, @user_agent, @remote_ip).execute
