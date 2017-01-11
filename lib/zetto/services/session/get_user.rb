@@ -4,7 +4,7 @@ module Zetto::Services::Session
 
     def initialize(cookies, user_agent, remote_ip)
       unless cookies.class.to_s == "ActionDispatch::Cookies::CookieJar"
-        raise ArgumentError.new('To save session cookies needed, object of ActionDispatch::Cookies::CookieJar')
+        raise ArgumentError.new(I18n.t('exseptions.save_session_cookies'))
       end
 
       @cookies = cookies
@@ -31,7 +31,7 @@ module Zetto::Services::Session
       end
       if Zetto::Config::Params.log
         logger = Zetto::Extension::ZettoLogger.instance
-        logger.info('initialize') { "User \"#{user[Zetto::Config::Params.user_class_name]}\" from model \"#{user.class}\" and ip \"#{@remote_ip}\"  has been connected." }
+        logger.info(I18n.t('log.connect')) { I18n.t('connect.success', field_name: user[Zetto::Config::Params.user_class_name], class_name: user.class.to_s, ip: @remote_ip.to_s) }
       end
       if session.soon_rotten?
         session = Zetto::Storage::Session::Create.new(user, @user_agent, @remote_ip).execute

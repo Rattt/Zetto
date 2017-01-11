@@ -18,7 +18,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'redis',    '~>3.2'
   s.add_dependency 'hiredis',  '~> 0.6.0'
   s.add_dependency 'i18n',     '0.7.0'
-  s.add_dependency 'colorize', '0.8.1'
 
   s.add_development_dependency 'rspec-rails',        "~> 3.5.2"
   s.add_development_dependency 'capybara',           "~> 2.11.0"

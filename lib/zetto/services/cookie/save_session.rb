@@ -6,10 +6,10 @@ module Zetto::Services::Cookie
     def initialize(session, cookies)
 
       unless session.class.to_s == "Zetto::Storage::Session::Data::Response"
-        raise ArgumentError.new('Isn\'t an object of Zetto::Storage::Session::Data::Response')
+        raise ArgumentError.new(I18n.t('exseptions.isnt_object', class_name: 'Zetto::Storage::Session::Data::Response'))
       end
       unless cookies.class.to_s == "ActionDispatch::Cookies::CookieJar"
-        raise ArgumentError.new('To save session cookies needed, object of ActionDispatch::Cookies::CookieJar')
+        raise ArgumentError.new(I18n.t('exseptions.save_session_cookies'))
       end
       @session = session
       @cookies = cookies

@@ -5,7 +5,7 @@ module Zetto::Services::Session
     def initialize(user, cookies, user_agent, remote_ip)
       Zetto::Config::Params.user_class(user.class.to_s)
       unless cookies.class.to_s == "ActionDispatch::Cookies::CookieJar"
-        raise ArgumentError.new('To save session cookies needed, object of ActionDispatch::Cookies::CookieJar')
+        raise ArgumentError.new(I18n.t('exseptions.save_session_cookies'))
       end
 
       @user = user

@@ -8,7 +8,7 @@ module Zetto::Services::Authentication
       @user_class = Zetto::Config::Params.user_class(class_name)
       access_attributes = [Zetto::Config::Params.user_class_name, Zetto::Config::Params.user_class_password]
       unless @user_class.column_names & access_attributes == access_attributes
-        raise ArgumentError.new('Attribute name(user_class_name) or password(user_class_password) is not defined')
+        raise ArgumentError.new(I18n.t('exseptions.attributes_is_not_defined'))
       end
 
       @name = name

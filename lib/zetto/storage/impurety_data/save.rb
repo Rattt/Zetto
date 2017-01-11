@@ -4,7 +4,7 @@ module Zetto::Storage::ImpuretyData
 
     def execute(data)
       unless data.class.to_s == "Zetto::Storage::ImpuretyData::Data::Response"
-        raise ArgumentError.new('Isn\'t an object of Zetto::Storage::ImpuretyData::Data::Response')
+        raise ArgumentError.new(I18n.t('exseptions.isnt_object', class_name: 'Zetto::Storage::ImpuretyData::Data::Response'))
       end
       save_data = {}
       key = data['key']

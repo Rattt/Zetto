@@ -1,7 +1,17 @@
 en:
   exseptions:
-            invalid_arguments: 'Invalid input arguments %{argument} #%{current_method}'
-            unknown_error:     'An error occurred %{argument} #%{current_method}'
-            undefined_field:   'An error occurred, most likely you do not have such a field "%{field}"'
+            invalid_arguments:         'Invalid input arguments %{argument} #%{current_method}'
+            unknown_error:             'An error occurred %{argument} #%{current_method}'
+            undefined_field:           'An error occurred, most likely you do not have such a field "%{field}"'
+            attributes_is_not_defined: 'Attribute name(user_class_name) or password(user_class_password) is not defined'
+            need_cookie:               'To save session cookies needed, object of ActionDispatch::Cookies::CookieJar'
+            isnt_object:               "Isn\'t an object of %{class_name}"
+            save_session_cookies:      'To save session cookies needed, object of ActionDispatch::Cookies::CookieJar'
   validate:
             password_confirm:  'Password must be checked attribute password_confirmation'
+
+  log:
+      connect: User conected
+
+  connect:
+          success: 'User "%{field_name}" from model "%{class_name}" and ip "%{ip}"  has been connected."'

@@ -5,7 +5,7 @@ module Zetto::Services::Cookie
 
     def initialize(cookies)
       unless cookies.class.to_s == "ActionDispatch::Cookies::CookieJar"
-        raise ArgumentError.new('To save session cookies needed, object of ActionDispatch::Cookies::CookieJar')
+        raise ArgumentError.new(I18n.t('exseptions.need_cookie'))
       end
       @cookies = cookies
     end
