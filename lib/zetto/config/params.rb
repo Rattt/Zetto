@@ -14,17 +14,32 @@ module Zetto
       @check_ip                          = false
       @log                               = false
       
-      @redis_connect = {:password => "3443555", "db" => 1}
+      @redis_connect = {:password => "", "db" => 1}
 
       @session_length = 9
       @session_time_min = 30
       @session_time_restart_min = 5
 
       class << self
-        attr_accessor :redis_connect, :session_length, :session_time_min, :session_time_restart_min,
-                      :user_class_name, :user_class_password, :user_class_password_length_larger, :check_ip, :log
 
-        attr_reader :user_class_password_crypto
+        def self.attr_writer_with_type(type, *args)
+          args.each do |arg|
+            self.send(:define_method, "#{arg}=".intern) do |value|
+              unless value.class.to_s == type
+                raise ArgumentError.new(I18n.t('exseptions.not_specified_type', arg: arg, type: type, class_name: value.class.to_s))
+              end
+              instance_variable_set("@#{arg}", value)
+            end
+          end
+        end
+
+        attr_writer_with_type 'Boolean', :check_ip, :log
+        attr_writer_with_type 'Fixnum',  :session_time_restart_min, :session_time_min, :session_length, :user_class_password_length_larger
+        attr_writer_with_type 'Hash',    :redis_connect
+        attr_writer_with_type 'String',  :user_class_name, :user_class_password
+
+        attr_reader :user_class_password_crypto, :check_ip, :log, :session_time_restart_min, :session_time_min, :session_length, :user_class_password_length_larger, :redis_connect,
+                    :user_class_name, :user_class_password
 
         def set_params
           yield self

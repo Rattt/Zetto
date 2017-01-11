@@ -17,7 +17,7 @@ Zetto.setup do |config|
   config.user_class_password_crypto = 'SHA1'
 
   # Настройки для подключения к бд redis, не используем 0 бд, так-как она предназначается для тестовых нужд
-  config.redis_connect = {:password => "3443555", "db" => 1}
+  config.redis_connect = {:password => "", "db" => 1}
 
   # Чем больше тем надежнее, но будет медленее поиск
   config.session_length = 9
