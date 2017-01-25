@@ -33,7 +33,7 @@ module Zetto
           end
         end
 
-        attr_writer_with_type 'Boolean', :check_ip, :log
+        attr_writer :check_ip, :log
         attr_writer_with_type 'Fixnum',  :session_time_restart_min, :session_time_min, :session_length, :user_class_password_length_larger
         attr_writer_with_type 'Hash',    :redis_connect
         attr_writer_with_type 'String',  :user_class_name, :user_class_password
